@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Drechsler API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/contact": {
+      "post": {
+        "tags": ["contact"],
+        "operationId": "contactStore",
+        "summary": "Enviar mensagem de contato",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactStoreRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mensagem enviada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactStoreResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro de validação"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ContactStoreRequest": {
+        "type": "object",
+        "required": ["name", "email", "message"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 30,
+            "nullable": true
+          },
+          "company": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 5000
+          }
+        }
+      },
+      "ContactStoreResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
