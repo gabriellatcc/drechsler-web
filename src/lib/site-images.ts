@@ -5,20 +5,14 @@ import bequerLiquidoVerde from "@/assets/bequer-liquido-verde.png";
 import bequersComContagotas from "@/assets/bequers-com-contagotas.png";
 import cano from "@/assets/cano.png";
 import cristaisAzuis from "@/assets/cristais-azuis.png";
-import fundoAzul from "@/assets/fundoazul.png";
 import fundoLandingPage from "@/assets/fundo-landing-page.png";
-import hero from "@/assets/hero.png";
 import homemAnotacoes from "@/assets/homem-anotacoes.png";
-import imagemFluidos from "@/assets/imagem-fluidos.png";
 import ligacoesQuimicas2 from "@/assets/ligacoes-quimicas-2.png";
 import liquidoDistribuido from "@/assets/liquido-distribuido.png";
 import logoColorida from "@/assets/logo-colorida.png";
 import logoModoEscuro from "@/assets/logo-modo-escuro.png";
-import logoPretoBranco from "@/assets/logo-preto-branco.png";
-import particulas from "@/assets/particulas.png";
 import povPesquisador from "@/assets/pov-pesquisador.png";
 import propriedadeIntelectual from "@/assets/proriedade-intelectual.png";
-import resolveProblemas from "@/assets/resolve-problemas.png";
 import segurandoTubo from "@/assets/segurando-tubo.png";
 
 import type { Service } from "@/lib/site-content";
@@ -26,15 +20,9 @@ import type { Service } from "@/lib/site-content";
 export const SITE_IMAGES = {
   logoColor: logoColorida,
   logoDark: logoModoEscuro,
-  logoMono: logoPretoBranco,
-  hero,
   homemAnotacoes,
   povPesquisador,
-  resolveProblemas,
-  fundoAzul,
   fundoLandingPage,
-  particulas,
-  imagemFluidos,
 } as const;
 
 export const SERVICE_IMAGES: Record<Service["slug"], string> = {
