@@ -21,7 +21,6 @@ import povPesquisador from "@/assets/pov-pesquisador.png";
 import propriedadeIntelectual from "@/assets/proriedade-intelectual.png";
 import resolveProblemas from "@/assets/resolve-problemas.png";
 import segurandoTubo from "@/assets/segurando-tubo.png";
-import tubos from "@/assets/tubos.png";
 
 import type { Service } from "@/lib/site-content";
 
