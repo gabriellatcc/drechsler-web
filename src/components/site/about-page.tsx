@@ -8,7 +8,7 @@ import {
   DIFFERENTIALS,
   MISSION_VISION_VALUES,
 } from "@/lib/site-content";
-import { DIFFERENTIAL_IMAGES, SITE_IMAGES } from "@/lib/site-images";
+import { DIFFERENTIAL_IMAGES } from "@/lib/site-images";
 
 export function AboutPage() {
   return (
