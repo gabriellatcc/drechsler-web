@@ -1,15 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
+import { PageHeroBand } from "@/components/layout/page-hero-band";
 import { ServiceCard } from "@/components/site/service-card";
 import { SiteIllustration } from "@/components/site/site-illustration";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   ABOUT,
   MISSION_VISION_VALUES,
   SERVICES,
-  SITE,
   whatsappUrl,
 } from "@/lib/site-content";
 import { SITE_IMAGES } from "@/lib/site-images";
@@ -19,52 +19,30 @@ export function HomePage() {
 
   return (
     <>
-      <section className="hero-gradient section-padding">
-        <div className="site-container grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="space-y-4">
-            <p className="label-technical text-primary">{SITE.shortName}</p>
-            <h1 className="heading-tight text-3xl md:text-4xl lg:text-5xl">
-              Inteligência científica para a indústria química e farmacêutica
-            </h1>
-            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.intro}</p>
-            <div className="flex flex-wrap gap-2 pt-1">
-              <Button asChild size="lg">
-                <Link to="/servicos">
-                  Conheça nossos serviços
-                  <ArrowRight className="size-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a href={whatsappUrl("Olá! Gostaria de saber mais sobre os serviços da DRECHSLER.")} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="size-4" />
-                  Fale no WhatsApp
-                </a>
-              </Button>
-            </div>
+      <PageHeroBand
+        variant="hero"
+        backgroundImage={SITE_IMAGES.fundoLandingPage}
+        suffix={
+          <div className="flex flex-wrap justify-center gap-2 pt-1">
+            <Button asChild size="lg">
+              <Link to="/servicos">
+                Conheça nossos serviços
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a
+                href={whatsappUrl("Olá! Gostaria de saber mais sobre os serviços da DRECHSLER.")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="size-4" />
+                Fale no WhatsApp
+              </a>
+            </Button>
           </div>
-
-          <div className="space-y-4">
-            <SiteIllustration
-              src={SITE_IMAGES.hero}
-              alt="Ilustração representando camadas de soluções científicas"
-              aspect="square"
-              className="border-primary/30 bg-card"
-              imageClassName="object-contain bg-black p-4"
-            />
-            <Card className="border-primary/30 bg-card">
-              <CardHeader>
-                <CardTitle>O que realizamos</CardTitle>
-                <CardDescription>Expertise, qualidade e segurança em cada projeto</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
-                <p>{ABOUT.team}</p>
-                <p>{ABOUT.custom}</p>
-                <p>{ABOUT.confidentiality}</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+        }
+      />
 
       <section className="section-padding border-y bg-muted/20">
         <div className="site-container space-y-6">
@@ -87,7 +65,7 @@ export function HomePage() {
             ))}
           </div>
 
-          <div className="border-t border-border pt-4">
+          <div className="flex justify-center">
             <Button asChild variant="outline">
               <Link to="/servicos">Ver todos os serviços</Link>
             </Button>
@@ -152,31 +130,23 @@ export function HomePage() {
       </section>
 
       <section className="section-padding border-t bg-primary text-primary-foreground">
-        <div className="site-container grid items-center gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <div className="space-y-3">
-            <h2 className="heading-tight text-2xl md:text-3xl">Pronto para conversar?</h2>
-            <p className="text-sm text-primary-foreground/90">
-              Entre em contato e descubra como podemos apoiar seu projeto com soluções
-              científicas customizadas e confidenciais.
-            </p>
-            <div className="flex flex-wrap gap-2 pt-2">
-              <Button asChild size="lg" variant="secondary">
-                <Link to="/contato">Enviar mensagem</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-                <a href={whatsappUrl("Olá! Gostaria de falar com a equipe DRECHSLER.")} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="size-4" />
-                  WhatsApp
-                </a>
-              </Button>
-            </div>
+        <div className="site-container mx-auto max-w-2xl space-y-3 text-center">
+          <h2 className="heading-tight text-2xl md:text-3xl">Pronto para conversar?</h2>
+          <p className="text-sm text-primary-foreground/90">
+            Entre em contato e descubra como podemos apoiar seu projeto com soluções
+            científicas customizadas e confidenciais.
+          </p>
+          <div className="flex flex-wrap justify-center gap-2 pt-2">
+            <Button asChild size="lg" variant="secondary">
+              <Link to="/contato">Enviar mensagem</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+              <a href={whatsappUrl("Olá! Gostaria de falar com a equipe DRECHSLER.")} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="size-4" />
+                WhatsApp
+              </a>
+            </Button>
           </div>
-          <SiteIllustration
-            src={SITE_IMAGES.imagemFluidos}
-            alt="Fluidos e reações químicas em laboratório"
-            aspect="wide"
-            className="border-primary-foreground/30"
-          />
         </div>
       </section>
     </>

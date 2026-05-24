@@ -1,15 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 
+import { PageHeroBand } from "@/components/layout/page-hero-band";
 import { SiteIllustration } from "@/components/site/site-illustration";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  getServiceBySlug,
-  SERVICE_CATEGORIES,
-  whatsappUrl,
-  type Service,
-} from "@/lib/site-content";
+import { getServiceBySlug, whatsappUrl, type Service } from "@/lib/site-content";
 import { getServiceImage } from "@/lib/site-images";
 
 type ServiceDetailPageProps = {
@@ -21,34 +17,21 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 
   return (
     <>
-      <section className="section-padding border-b border-border bg-muted/20">
-        <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div className="space-y-4">
-            <Button asChild variant="ghost" className="h-auto p-0">
-              <Link to="/servicos">
-                <ArrowLeft className="size-4" />
-                Voltar aos serviços
-              </Link>
-            </Button>
-
-            <div className="space-y-2">
-              <p className="label-technical text-primary">
-                {SERVICE_CATEGORIES[service.category]}
-              </p>
-              <h1 className="heading-tight text-3xl md:text-4xl">{service.title}</h1>
-              <p className="text-sm leading-relaxed text-muted-foreground">{service.summary}</p>
-            </div>
-          </div>
-
-          {serviceImage ? (
-            <SiteIllustration
-              src={serviceImage}
-              alt={service.title}
-              aspect="wide"
-            />
-          ) : null}
-        </div>
-      </section>
+      <PageHeroBand
+        prefix={
+          <Button asChild variant="ghost" className="h-auto p-0">
+            <Link to="/servicos">
+              <ArrowLeft className="size-4" />
+              Voltar aos serviços
+            </Link>
+          </Button>
+        }
+        aside={
+          serviceImage ? (
+            <SiteIllustration src={serviceImage} alt={service.title} aspect="wide" />
+          ) : null
+        }
+      />
 
       <section className="section-padding">
         <div className="site-container space-y-6">
@@ -88,17 +71,16 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 
 export function ServiceNotFoundPage() {
   return (
-    <section className="section-padding">
-      <div className="site-container max-w-xl space-y-3 border border-border p-6 text-center">
-        <h1 className="heading-tight text-xl">Serviço não encontrado</h1>
-        <p className="text-sm text-muted-foreground">
-          O serviço solicitado não existe ou foi removido.
-        </p>
-        <Button asChild>
-          <Link to="/servicos">Ver todos os serviços</Link>
-        </Button>
-      </div>
-    </section>
+    <>
+      <PageHeroBand />
+      <section className="section-padding">
+        <div className="site-container max-w-xl border border-border p-6 text-center">
+          <Button asChild>
+            <Link to="/servicos">Ver todos os serviços</Link>
+          </Button>
+        </div>
+      </section>
+    </>
   );
 }
 

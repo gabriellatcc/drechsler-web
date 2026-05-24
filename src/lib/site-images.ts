@@ -8,11 +8,11 @@ import bequersComContagotas from "@/assets/bequers-com-contagotas.png";
 import cano from "@/assets/cano.png";
 import cristaisAzuis from "@/assets/cristais-azuis.png";
 import fundoAzul from "@/assets/fundoazul.png";
+import fundoLandingPage from "@/assets/fundo-landing-page.png";
 import hero from "@/assets/hero.png";
 import homemAnotacoes from "@/assets/homem-anotacoes.png";
 import imagemFluidos from "@/assets/imagem-fluidos.png";
 import ligacoesQuimicas2 from "@/assets/ligacoes-quimicas-2.png";
-import ligacoesQuimicas from "@/assets/ligacoes-quimicas.png";
 import liquidoDistribuido from "@/assets/liquido-distribuido.png";
 import logoColorida from "@/assets/logo-colorida.png";
 import logoPretoBranco from "@/assets/logo-preto-branco.png";
@@ -33,6 +33,7 @@ export const SITE_IMAGES = {
   povPesquisador,
   resolveProblemas,
   fundoAzul,
+  fundoLandingPage,
   particulas,
   imagemFluidos,
 } as const;
@@ -48,13 +49,6 @@ export const SERVICE_IMAGES: Record<Service["slug"], string> = {
   "propriedade-intelectual": propriedadeIntelectual,
   "documentacao-anvisa": ampolasTabela,
   "cursos-treinamentos": segurandoTubo,
-};
-
-export const CATEGORY_IMAGES: Record<Service["category"], string> = {
-  tecnologicos: ligacoesQuimicas,
-  analiticos: tubos,
-  regulatorios: ampolaLigacoes,
-  treinamentos: bequerCalculos,
 };
 
 export const DIFFERENTIAL_IMAGES: Record<string, string> = {

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { MessageCircle, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { SITE_IMAGES } from "@/lib/site-images";
@@ -9,9 +9,24 @@ import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 0);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b transition-colors duration-200",
+        scrolled
+          ? "border-border/70 bg-background/70 backdrop-blur-md"
+          : "border-border bg-background",
+      )}
+    >
       <div className="site-container flex h-14 items-center justify-between gap-4">
         <Link
           to="/"
@@ -59,7 +74,8 @@ export function SiteHeader() {
 
       <div
         className={cn(
-          "border-t border-border md:hidden",
+          "border-t md:hidden",
+          scrolled ? "border-border/70 bg-background/70 backdrop-blur-md" : "border-border bg-background",
           mobileOpen ? "block" : "hidden",
         )}
       >

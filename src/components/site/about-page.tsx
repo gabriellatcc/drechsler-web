@@ -7,28 +7,12 @@ import {
   CREDENTIALS,
   DIFFERENTIALS,
   MISSION_VISION_VALUES,
-  SITE,
 } from "@/lib/site-content";
 import { DIFFERENTIAL_IMAGES, SITE_IMAGES } from "@/lib/site-images";
 
 export function AboutPage() {
   return (
     <>
-      <section className="section-padding border-b border-border bg-muted/20">
-        <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div className="space-y-3">
-            <p className="label-technical text-primary">Sobre</p>
-            <h1 className="heading-tight text-3xl md:text-4xl">{SITE.name}</h1>
-            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.intro}</p>
-          </div>
-          <SiteIllustration
-            src={SITE_IMAGES.povPesquisador}
-            alt="Laboratório com estruturas químicas e equipamentos de pesquisa"
-            aspect="wide"
-          />
-        </div>
-      </section>
-
       <section className="section-padding">
         <div className="site-container grid gap-8 lg:grid-cols-[1fr_1.2fr]">
           <div className="space-y-3">
@@ -83,19 +67,19 @@ export function AboutPage() {
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {DIFFERENTIALS.map((item) => (
-              <Card key={item.title} className="overflow-hidden">
+              <Card key={item.title} className="gap-1 overflow-hidden">
                 <SiteIllustration
                   src={DIFFERENTIAL_IMAGES[item.title]}
                   alt={item.title}
                   aspect="video"
                   className="rounded-none border-0 border-b shadow-none"
                 />
-                <CardHeader>
+                <CardHeader className="border-0 pb-0">
                   <CardTitle>{item.title}</CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm leading-relaxed text-muted-foreground">
+                <CardContent className="pt-0 text-sm leading-relaxed text-muted-foreground">
                   {item.description}
                 </CardContent>
               </Card>

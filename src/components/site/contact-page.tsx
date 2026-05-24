@@ -2,8 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Mail, MessageCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-import { SiteIllustration } from "@/components/site/site-illustration";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -19,7 +17,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useContactStore } from "@/generated/api/contact/contact";
 import { toastApiError, toastApiSuccess } from "@/lib/api-toast";
 import { CONTACT, whatsappUrl } from "@/lib/site-content";
-import { SITE_IMAGES } from "@/lib/site-images";
 
 export const contactFormSchema = z.object({
   name: z.string().min(2, "Informe seu nome completo.").max(255),
@@ -72,24 +69,6 @@ export function ContactPage() {
 
   return (
     <>
-      <section className="section-padding border-b border-border bg-muted/20">
-        <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div className="space-y-3">
-            <p className="label-technical text-primary">Contato</p>
-            <h1 className="heading-tight text-3xl md:text-4xl">Fale conosco</h1>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Envie sua mensagem ou fale diretamente pelo WhatsApp. Nossa equipe retornará o
-              contato o mais breve possível.
-            </p>
-          </div>
-          <SiteIllustration
-            src={SITE_IMAGES.resolveProblemas}
-            alt="Pesquisa e resolução de problemas científicos"
-            aspect="wide"
-          />
-        </div>
-      </section>
-
       <section className="py-10 md:py-14 bg-secondary-foreground">
         <div className="site-container grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <div className="space-y-3">
