@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
+import { ServiceCard } from "@/components/site/service-card";
 import { SiteIllustration } from "@/components/site/site-illustration";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,7 +12,7 @@ import {
   SITE,
   whatsappUrl,
 } from "@/lib/site-content";
-import { SERVICE_IMAGES, SITE_IMAGES } from "@/lib/site-images";
+import { SITE_IMAGES } from "@/lib/site-images";
 
 export function HomePage() {
   const featuredServices = SERVICES.slice(0, 6);
@@ -67,7 +68,7 @@ export function HomePage() {
 
       <section className="section-padding border-y bg-muted/20">
         <div className="site-container space-y-6">
-          <div className="max-w-2xl space-y-2 border-b border-border pb-4">
+          <div className="max-w-2xl space-y-2 border-l-4 border-zinc-900 pl-4">
             <h2 className="heading-tight text-2xl md:text-3xl">Serviços</h2>
             <p className="text-sm text-muted-foreground">
               Amplo portfólio de soluções tecnológicas, analíticas, regulatórias e de
@@ -77,26 +78,12 @@ export function HomePage() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {featuredServices.map((service) => (
-              <Card key={service.slug} className="flex flex-col overflow-hidden">
-                <SiteIllustration
-                  src={SERVICE_IMAGES[service.slug]}
-                  alt={service.title}
-                  aspect="video"
-                  className="rounded-none border-0 border-b shadow-none"
-                />
-                <CardHeader>
-                  <CardTitle>{service.title}</CardTitle>
-                  <CardDescription>{service.summary}</CardDescription>
-                </CardHeader>
-                <CardContent className="mt-auto">
-                  <Button asChild variant="link" className="h-auto p-0">
-                    <Link to="/servicos/$slug" params={{ slug: service.slug }}>
-                      Saiba mais
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+              <ServiceCard
+                key={service.slug}
+                slug={service.slug}
+                title={service.title}
+                summary={service.summary}
+              />
             ))}
           </div>
 

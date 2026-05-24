@@ -1,11 +1,7 @@
-import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
-
+import { ServiceCard } from "@/components/site/service-card";
 import { SiteIllustration } from "@/components/site/site-illustration";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { SERVICE_CATEGORIES, SERVICES } from "@/lib/site-content";
-import { CATEGORY_IMAGES, SERVICE_IMAGES, SITE_IMAGES } from "@/lib/site-images";
+import { CATEGORY_IMAGES, SITE_IMAGES } from "@/lib/site-images";
 
 export function ServicesPage() {
   const categories = Object.entries(SERVICE_CATEGORIES) as Array<
@@ -49,26 +45,13 @@ export function ServicesPage() {
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {categoryServices.map((service) => (
-                  <Card key={service.slug} className="flex flex-col overflow-hidden">
-                    <SiteIllustration
-                      src={SERVICE_IMAGES[service.slug]}
-                      alt={service.title}
-                      aspect="video"
-                      className="rounded-none border-0 border-b shadow-none"
-                    />
-                    <CardHeader>
-                      <CardTitle>{service.title}</CardTitle>
-                      <CardDescription>{service.summary}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="mt-auto">
-                      <Button asChild variant="link" className="h-auto p-0">
-                        <Link to="/servicos/$slug" params={{ slug: service.slug }}>
-                          Ver detalhes
-                          <ArrowRight className="size-4" />
-                        </Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
+                  <ServiceCard
+                    key={service.slug}
+                    slug={service.slug}
+                    title={service.title}
+                    summary={service.summary}
+                    linkLabel="Ver detalhes"
+                  />
                 ))}
               </div>
             </div>

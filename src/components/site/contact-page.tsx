@@ -90,7 +90,7 @@ export function ContactPage() {
         </div>
       </section>
 
-      <section className="section-padding">
+      <section className="py-10 md:py-14 bg-secondary-foreground">
         <div className="site-container grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <div className="space-y-3">
             <Card>
