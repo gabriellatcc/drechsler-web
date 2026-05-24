@@ -5,6 +5,12 @@ export const textRevealTransition: Transition = {
   ease: [0.22, 1, 0.36, 1],
 };
 
+export const textRevealDelays = {
+  label: 0,
+  title: 0.08,
+  description: 0.18,
+} as const;
+
 export const textRevealVariants: Variants = {
   initial: {
     opacity: 0,

@@ -101,11 +101,7 @@ export function AboutPage() {
               ))}
             </ul>
           </div>
-          <SiteIllustration
-            src={SITE_IMAGES.particulas}
-            alt="Partículas em escala microscópica"
-            aspect="square"
-          />
+  
         </div>
       </section>
     </>

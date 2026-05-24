@@ -1,4 +1,5 @@
 import { AnimatedText } from "@/components/ui/animated-text";
+import { textRevealDelays } from "@/lib/motion/text-transitions";
 import { useResolvedPageContent } from "@/lib/use-page-content";
 import { cn } from "@/lib/utils";
 
@@ -21,8 +22,7 @@ export function PageAreaHeader({ variant = "default", className }: PageAreaHeade
         <AnimatedText
           animationKey={`${content.animationKey}-label`}
           as="p"
-          animateOnMount={isHero}
-          delay={isHero ? 0 : undefined}
+          delay={textRevealDelays.label}
           className={cn(
             "label-technical",
             isHero ? "text-white/80" : "text-primary",
@@ -35,8 +35,7 @@ export function PageAreaHeader({ variant = "default", className }: PageAreaHeade
       <AnimatedText
         animationKey={`${content.animationKey}-title`}
         as="h1"
-        animateOnMount={isHero}
-        delay={isHero ? 0.08 : undefined}
+        delay={textRevealDelays.title}
         className={cn(
           "heading-tight text-3xl md:text-4xl",
           isHero && "text-white lg:text-5xl",
@@ -48,8 +47,7 @@ export function PageAreaHeader({ variant = "default", className }: PageAreaHeade
       <AnimatedText
         animationKey={`${content.animationKey}-description`}
         as="p"
-        animateOnMount={isHero}
-        delay={isHero ? 0.18 : undefined}
+        delay={textRevealDelays.description}
         className={cn(
           "text-sm leading-relaxed",
           isHero ? "text-white/75" : "text-muted-foreground",

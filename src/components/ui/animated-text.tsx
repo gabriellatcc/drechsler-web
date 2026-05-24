@@ -13,8 +13,6 @@ type AnimatedTextProps = {
   children: string;
   as?: "h1" | "h2" | "h3" | "h4" | "p" | "span";
   className?: string;
-  /** Anima na montagem inicial (ex.: hero da home). */
-  animateOnMount?: boolean;
   delay?: number;
 };
 
@@ -23,7 +21,6 @@ export function AnimatedText({
   children,
   as = "p",
   className,
-  animateOnMount = false,
   delay = 0,
 }: AnimatedTextProps) {
   const reduceMotion = useReducedMotion();
@@ -31,7 +28,7 @@ export function AnimatedText({
   const variants = reduceMotion ? textRevealReducedMotionVariants : textRevealVariants;
 
   return (
-    <AnimatePresence mode="wait" initial={animateOnMount ? undefined : false}>
+    <AnimatePresence mode="wait" initial={false}>
       <MotionTag
         key={animationKey}
         initial="initial"

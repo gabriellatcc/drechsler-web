@@ -51,6 +51,17 @@ export type ResolvedPageContent = PageContentEntry & {
   animationKey: string;
 };
 
+const NAV_HEADER_SEGMENTS: PageSegmentKey[] = [
+  "home",
+  "sobre",
+  "servicos",
+  "contato",
+];
+
+export function usesNavPageHeader(segment: PageSegmentKey): boolean {
+  return NAV_HEADER_SEGMENTS.includes(segment);
+}
+
 export function resolvePageSegment(pathname: string, slug?: string): ResolvedPageContent {
   const normalizedPath = pathname.replace(/\/+$/, "") || "/";
 

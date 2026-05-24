@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
-import { PageHeroBand } from "@/components/layout/page-hero-band";
 import { ServiceCard } from "@/components/site/service-card";
 import { SiteIllustration } from "@/components/site/site-illustration";
 import { Button } from "@/components/ui/button";
@@ -19,31 +18,6 @@ export function HomePage() {
 
   return (
     <>
-      <PageHeroBand
-        variant="hero"
-        backgroundImage={SITE_IMAGES.fundoLandingPage}
-        suffix={
-          <div className="flex flex-wrap justify-center gap-2 pt-1">
-            <Button asChild size="lg">
-              <Link to="/servicos">
-                Conheça nossos serviços
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <a
-                href={whatsappUrl("Olá! Gostaria de saber mais sobre os serviços da DRECHSLER.")}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="size-4" />
-                Fale no WhatsApp
-              </a>
-            </Button>
-          </div>
-        }
-      />
-
       <section className="section-padding border-y bg-muted/20">
         <div className="site-container space-y-6">
           <div className="space-y-2 border-l-4 border-zinc-900 pl-4">
