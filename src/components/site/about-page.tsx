@@ -14,12 +14,12 @@ import { DIFFERENTIAL_IMAGES, SITE_IMAGES } from "@/lib/site-images";
 export function AboutPage() {
   return (
     <>
-      <section className="section-padding border-b bg-muted/20">
-        <div className="site-container grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
-          <div className="max-w-3xl space-y-4">
-            <p className="text-sm font-medium uppercase tracking-wider text-primary">Sobre</p>
-            <h1 className="text-4xl font-bold tracking-tight">{SITE.name}</h1>
-            <p className="text-lg text-muted-foreground">{ABOUT.intro}</p>
+      <section className="section-padding border-b border-border bg-muted/20">
+        <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
+          <div className="max-w-3xl space-y-3">
+            <p className="label-technical text-primary">Sobre</p>
+            <h1 className="heading-tight text-3xl md:text-4xl">{SITE.name}</h1>
+            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.intro}</p>
           </div>
           <SiteIllustration
             src={SITE_IMAGES.povPesquisador}
@@ -30,40 +30,40 @@ export function AboutPage() {
       </section>
 
       <section className="section-padding">
-        <div className="site-container grid gap-10 lg:grid-cols-[1fr_1.2fr]">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">Quem somos</h2>
-            <p className="text-muted-foreground">{ABOUT.team}</p>
-            <p className="text-muted-foreground">{ABOUT.custom}</p>
-            <p className="text-muted-foreground">{ABOUT.confidentiality}</p>
+        <div className="site-container grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+          <div className="space-y-3">
+            <h2 className="heading-tight text-xl md:text-2xl">Quem somos</h2>
+            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.team}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.custom}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.confidentiality}</p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Missão</CardTitle>
+                <CardTitle>Missão</CardTitle>
               </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
+              <CardContent className="text-sm leading-relaxed text-muted-foreground">
                 {MISSION_VISION_VALUES.mission}
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Visão</CardTitle>
+                <CardTitle>Visão</CardTitle>
               </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
+              <CardContent className="text-sm leading-relaxed text-muted-foreground">
                 {MISSION_VISION_VALUES.vision}
               </CardContent>
             </Card>
             <Card className="sm:col-span-2">
               <CardHeader>
-                <CardTitle className="text-base">Valores</CardTitle>
+                <CardTitle>Valores</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="grid gap-2 sm:grid-cols-2">
                   {MISSION_VISION_VALUES.values.map((value) => (
                     <li key={value} className="flex items-center gap-2 text-sm">
-                      <CheckCircle2 className="size-4 shrink-0 text-primary" />
+                      <CheckCircle2 className="size-3.5 shrink-0 text-primary" />
                       {value}
                     </li>
                   ))}
@@ -74,16 +74,16 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-muted/30">
-        <div className="site-container space-y-8">
-          <div className="max-w-2xl space-y-2">
-            <h2 className="text-2xl font-bold">Diferenciais</h2>
-            <p className="text-muted-foreground">
+      <section className="section-padding border-y border-border bg-muted/20">
+        <div className="site-container space-y-6">
+          <div className="max-w-2xl space-y-2 border-b border-border pb-4">
+            <h2 className="heading-tight text-xl md:text-2xl">Diferenciais</h2>
+            <p className="text-sm text-muted-foreground">
               O que nos permite entregar resultados com segurança e qualidade.
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {DIFFERENTIALS.map((item) => (
               <Card key={item.title} className="overflow-hidden">
                 <SiteIllustration
@@ -93,9 +93,9 @@ export function AboutPage() {
                   className="rounded-none border-0 border-b shadow-none"
                 />
                 <CardHeader>
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
+                  <CardTitle>{item.title}</CardTitle>
                 </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
+                <CardContent className="text-sm leading-relaxed text-muted-foreground">
                   {item.description}
                 </CardContent>
               </Card>
@@ -105,13 +105,13 @@ export function AboutPage() {
       </section>
 
       <section className="section-padding">
-        <div className="site-container grid gap-10 lg:grid-cols-[1.1fr_1fr]">
-          <div className="max-w-3xl space-y-6">
-            <h2 className="text-2xl font-bold">Credenciais e atuação regulatória</h2>
-            <ul className="space-y-3">
+        <div className="site-container grid gap-8 lg:grid-cols-[1.1fr_1fr]">
+          <div className="max-w-3xl space-y-4">
+            <h2 className="heading-tight text-xl md:text-2xl">Credenciais e atuação regulatória</h2>
+            <ul className="space-y-2">
               {CREDENTIALS.map((credential) => (
-                <li key={credential} className="flex gap-3 text-muted-foreground">
-                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary" />
+                <li key={credential} className="flex gap-3 text-sm text-muted-foreground">
+                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" />
                   <span>{credential}</span>
                 </li>
               ))}

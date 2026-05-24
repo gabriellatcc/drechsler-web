@@ -25,7 +25,7 @@ export function SiteIllustration({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-xl border bg-muted/30 shadow-sm",
+        "overflow-hidden rounded-sm border border-border bg-muted/20",
         aspectClasses[aspect],
         className,
       )}

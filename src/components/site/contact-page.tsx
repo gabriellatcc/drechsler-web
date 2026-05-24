@@ -72,12 +72,12 @@ export function ContactPage() {
 
   return (
     <>
-      <section className="section-padding border-b bg-muted/20">
-        <div className="site-container grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
-          <div className="max-w-3xl space-y-4">
-            <p className="text-sm font-medium uppercase tracking-wider text-primary">Contato</p>
-            <h1 className="text-4xl font-bold tracking-tight">Fale conosco</h1>
-            <p className="text-lg text-muted-foreground">
+      <section className="section-padding border-b border-border bg-muted/20">
+        <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
+          <div className="max-w-3xl space-y-3">
+            <p className="label-technical text-primary">Contato</p>
+            <h1 className="heading-tight text-3xl md:text-4xl">Fale conosco</h1>
+            <p className="text-sm leading-relaxed text-muted-foreground">
               Envie sua mensagem ou fale diretamente pelo WhatsApp. Nossa equipe retornará o
               contato o mais breve possível.
             </p>
@@ -91,21 +91,21 @@ export function ContactPage() {
       </section>
 
       <section className="section-padding">
-        <div className="site-container grid gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div className="space-y-4">
+        <div className="site-container grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+          <div className="space-y-3">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Canais de contato</CardTitle>
+                <CardTitle>Canais de contato</CardTitle>
                 <CardDescription>Escolha a forma mais conveniente para você</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4 text-sm">
+              <CardContent className="space-y-3 text-sm">
                 {CONTACT.emails.map((email) => (
                   <a
                     key={email}
                     href={`mailto:${email}`}
-                    className="flex items-center gap-3 text-muted-foreground hover:text-foreground"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
                   >
-                    <Mail className="size-4 shrink-0" />
+                    <Mail className="size-3.5 shrink-0" />
                     {email}
                   </a>
                 ))}
@@ -113,9 +113,9 @@ export function ContactPage() {
                   href={whatsappUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground"
+                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
                 >
-                  <MessageCircle className="size-4 shrink-0" />
+                  <MessageCircle className="size-3.5 shrink-0" />
                   WhatsApp: {CONTACT.whatsapp}
                 </a>
               </CardContent>
@@ -136,7 +136,7 @@ export function ContactPage() {
             </CardHeader>
             <CardContent>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
                   <FormField
                     control={form.control}
                     name="name"
@@ -170,7 +170,7 @@ export function ContactPage() {
                     )}
                   />
 
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="grid gap-3 sm:grid-cols-2">
                     <FormField
                       control={form.control}
                       name="phone"

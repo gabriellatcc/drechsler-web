@@ -21,9 +21,9 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 
   return (
     <>
-      <section className="section-padding border-b bg-muted/20">
-        <div className="site-container grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
-          <div className="max-w-3xl space-y-6">
+      <section className="section-padding border-b border-border bg-muted/20">
+        <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
+          <div className="max-w-3xl space-y-4">
             <Button asChild variant="ghost" className="h-auto p-0">
               <Link to="/servicos">
                 <ArrowLeft className="size-4" />
@@ -31,12 +31,12 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
               </Link>
             </Button>
 
-            <div className="space-y-3">
-              <p className="text-sm font-medium text-primary">
+            <div className="space-y-2">
+              <p className="label-technical text-primary">
                 {SERVICE_CATEGORIES[service.category]}
               </p>
-              <h1 className="text-4xl font-bold tracking-tight">{service.title}</h1>
-              <p className="text-lg text-muted-foreground">{service.summary}</p>
+              <h1 className="heading-tight text-3xl md:text-4xl">{service.title}</h1>
+              <p className="text-sm leading-relaxed text-muted-foreground">{service.summary}</p>
             </div>
           </div>
 
@@ -51,13 +51,13 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
       </section>
 
       <section className="section-padding">
-        <div className="site-container max-w-3xl space-y-8">
+        <div className="site-container max-w-3xl space-y-6">
           <Card>
-            <CardContent className="pt-6">
-              <ul className="space-y-4">
+            <CardContent className="pt-4">
+              <ul className="divide-y divide-border">
                 {service.items.map((item) => (
-                  <li key={item} className="flex gap-3 text-muted-foreground">
-                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-primary" />
+                  <li key={item} className="flex gap-3 py-3 text-sm text-muted-foreground first:pt-0 last:pb-0">
+                    <span className="mt-1.5 size-1.5 shrink-0 bg-primary" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -65,7 +65,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
             </CardContent>
           </Card>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 border-t border-border pt-4">
             <Button asChild>
               <Link to="/contato">Solicitar informações</Link>
             </Button>
@@ -89,9 +89,9 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 export function ServiceNotFoundPage() {
   return (
     <section className="section-padding">
-      <div className="site-container max-w-xl space-y-4 text-center">
-        <h1 className="text-2xl font-bold">Serviço não encontrado</h1>
-        <p className="text-muted-foreground">
+      <div className="site-container max-w-xl space-y-3 border border-border p-6 text-center">
+        <h1 className="heading-tight text-xl">Serviço não encontrado</h1>
+        <p className="text-sm text-muted-foreground">
           O serviço solicitado não existe ou foi removido.
         </p>
         <Button asChild>

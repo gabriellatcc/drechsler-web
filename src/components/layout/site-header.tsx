@@ -11,8 +11,8 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="site-container flex h-16 items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 border-b border-border bg-background">
+      <div className="site-container flex h-14 items-center justify-between gap-4">
         <Link
           to="/"
           className="flex shrink-0 items-center"
@@ -21,16 +21,16 @@ export function SiteHeader() {
           <img
             src={SITE_IMAGES.logoColor}
             alt="DRECHSLER Inovação & Tecnologia Química"
-            className="h-10 w-auto sm:h-11"
+            className="h-9 w-auto sm:h-10"
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-5 md:flex">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-xs font-medium uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground" }}
             >
               {item.label}
@@ -49,26 +49,26 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-md border md:hidden"
+          className="inline-flex size-9 items-center justify-center rounded-sm border border-border md:hidden"
           aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
           onClick={() => setMobileOpen((open) => !open)}
         >
-          {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
         </button>
       </div>
 
       <div
         className={cn(
-          "border-t md:hidden",
+          "border-t border-border md:hidden",
           mobileOpen ? "block" : "hidden",
         )}
       >
-        <nav className="site-container flex flex-col gap-1 py-4">
+        <nav className="site-container flex flex-col gap-0 py-2">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
+              className="border-b border-border px-3 py-2 text-xs font-medium uppercase tracking-wider text-muted-foreground last:border-b-0 hover:bg-muted hover:text-foreground"
               activeProps={{ className: "bg-muted text-foreground" }}
               onClick={() => setMobileOpen(false)}
             >
