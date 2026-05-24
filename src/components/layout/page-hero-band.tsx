@@ -47,7 +47,12 @@ export function PageHeroBand({
             {suffix}
           </div>
         ) : (
-          <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
+          <div
+            className={cn(
+              "grid items-center gap-8",
+              aside && "lg:grid-cols-[1fr_1.1fr]",
+            )}
+          >
             <div className="space-y-4">
               {prefix}
               {children ?? <PageAreaHeader />}

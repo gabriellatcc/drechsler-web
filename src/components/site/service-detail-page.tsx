@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getServiceBySlug, whatsappUrl, type Service } from "@/lib/site-content";
 import { getServiceImage } from "@/lib/site-images";
+import { cn } from "@/lib/utils";
 
 type ServiceDetailPageProps = {
   service: Service;
@@ -26,27 +27,42 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
             </Link>
           </Button>
         }
-        aside={
-          serviceImage ? (
-            <SiteIllustration src={serviceImage} alt={service.title} aspect="wide" />
-          ) : null
-        }
       />
 
       <section className="section-padding">
         <div className="site-container space-y-6">
-          <Card>
-            <CardContent className="pt-4">
-              <ul className="divide-y divide-border">
-                {service.items.map((item) => (
-                  <li key={item} className="flex gap-3 py-3 text-sm text-muted-foreground first:pt-0 last:pb-0">
-                    <span className="mt-1.5 size-1.5 shrink-0 bg-primary" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+          <div
+            className={cn(
+              "grid gap-8",
+              serviceImage && "lg:grid-cols-[auto_minmax(0,5fr)] lg:items-start",
+            )}
+          >
+            {serviceImage ? (
+              <SiteIllustration
+                src={serviceImage}
+                alt={service.title}
+                aspect="square"
+                className="size-[150px] shrink-0 lg:sticky lg:top-24"
+                imageClassName="size-full object-cover"
+              />
+            ) : null}
+
+            <Card>
+              <CardContent className="pt-4">
+                <ul className="divide-y divide-border">
+                  {service.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-3 py-3 text-sm text-muted-foreground first:pt-0 last:pb-0"
+                    >
+                      <span className="mt-1.5 size-1.5 shrink-0 bg-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
 
           <div className="flex flex-wrap gap-2 border-t border-border pt-4">
             <Button asChild>
