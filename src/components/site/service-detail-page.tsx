@@ -20,7 +20,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
       <PageHeroBand
         prefix={
           <Button asChild variant="ghost" className="h-auto p-0">
-            <Link to="/servicos">
+            <Link to="/servicos" search={{ categoria: service.category }}>
               <ArrowLeft className="size-4" />
               Voltar aos serviços
             </Link>

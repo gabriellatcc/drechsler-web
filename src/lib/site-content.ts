@@ -216,6 +216,14 @@ export const SERVICE_CATEGORIES: Record<Service["category"], string> = {
   treinamentos: "Cursos e Treinamentos",
 };
 
+export const SERVICE_CATEGORY_KEYS = Object.keys(
+  SERVICE_CATEGORIES,
+) as Service["category"][];
+
+export function isServiceCategory(value: string): value is Service["category"] {
+  return SERVICE_CATEGORY_KEYS.includes(value as Service["category"]);
+}
+
 export function getServiceBySlug(slug: string): Service | undefined {
   return SERVICES.find((service) => service.slug === slug);
 }

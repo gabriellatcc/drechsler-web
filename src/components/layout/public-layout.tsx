@@ -37,14 +37,18 @@ function NavPageHero() {
   }
 
   const isHero = content.segment === "home";
+  const isServicos = content.segment === "servicos";
   const aside = getSharedHeroAside(content.segment);
 
   return (
     <section
       className={cn(
         isHero
-          ? "hero-overlay relative flex min-h-[calc(50vh-1.75rem)] items-center justify-center border-b bg-cover bg-center sm:min-h-[calc((100vh-3.5rem)/2)]"
-          : "section-padding border-b border-border bg-muted/20",
+          ? "hero-overlay relative flex min-h-[calc(50vh-1.75rem)] items-center justify-center bg-cover bg-center sm:min-h-[calc((100vh-3.5rem)/2)]"
+          : cn(
+              "bg-muted/20",
+              isServicos ? "pt-9 md:pt-10" : "section-padding",
+            ),
       )}
       style={isHero ? { backgroundImage: `url(${SITE_IMAGES.fundoLandingPage})` } : undefined}
     >
