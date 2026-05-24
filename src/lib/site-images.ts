@@ -15,6 +15,7 @@ import imagemFluidos from "@/assets/imagem-fluidos.png";
 import ligacoesQuimicas2 from "@/assets/ligacoes-quimicas-2.png";
 import liquidoDistribuido from "@/assets/liquido-distribuido.png";
 import logoColorida from "@/assets/logo-colorida.png";
+import logoModoEscuro from "@/assets/logo-modo-escuro.png";
 import logoPretoBranco from "@/assets/logo-preto-branco.png";
 import particulas from "@/assets/particulas.png";
 import povPesquisador from "@/assets/pov-pesquisador.png";
@@ -26,6 +27,7 @@ import type { Service } from "@/lib/site-content";
 
 export const SITE_IMAGES = {
   logoColor: logoColorida,
+  logoDark: logoModoEscuro,
   logoMono: logoPretoBranco,
   hero,
   homemAnotacoes,

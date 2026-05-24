@@ -2,12 +2,14 @@ import { Link } from "@tanstack/react-router";
 import { MessageCircle, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { useTheme } from "@/components/providers/theme-provider";
 import { Button } from "@/components/ui/button";
 import { SITE_IMAGES } from "@/lib/site-images";
 import { CONTACT, NAV_ITEMS, whatsappUrl } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
+  const { theme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -34,7 +36,7 @@ export function SiteHeader() {
           onClick={() => setMobileOpen(false)}
         >
           <img
-            src={SITE_IMAGES.logoColor}
+            src={theme === "dark" ? SITE_IMAGES.logoDark : SITE_IMAGES.logoColor}
             alt="DRECHSLER Inovação & Tecnologia Química"
             className="h-9 w-auto sm:h-10"
           />

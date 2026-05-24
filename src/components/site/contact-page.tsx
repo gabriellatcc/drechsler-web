@@ -1,6 +1,6 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, Mail, MessageCircle } from "lucide-react";
+import { Loader2, Mail, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,27 +9,22 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useContactStore } from "@/generated/api/contact/contact";
 import { toastApiError, toastApiSuccess } from "@/lib/api-toast";
-import { CONTACT, whatsappUrl } from "@/lib/site-content";
+import { CONTACT } from "@/lib/site-content";
 
-export const contactFormSchema = z.object({
+const contactFormSchema = z.object({
   name: z.string().min(2, "Informe seu nome completo.").max(255),
   email: z.string().email("Informe um e-mail válido.").max(255),
   phone: z.string().max(30).optional().or(z.literal("")),
-  company: z.string().max(255).optional().or(z.literal("")),
-  message: z
-    .string()
-    .min(10, "Descreva sua mensagem com pelo menos 10 caracteres.")
-    .max(5000),
+  message: z.string().min(10, "Descreva sua mensagem com pelo menos 10 caracteres.").max(5000),
 });
 
-export type ContactFormValues = z.infer<typeof contactFormSchema>;
+type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 export function ContactPage() {
   const form = useForm<ContactFormValues>({
@@ -38,7 +33,6 @@ export function ContactPage() {
       name: "",
       email: "",
       phone: "",
-      company: "",
       message: "",
     },
   });
@@ -62,157 +56,131 @@ export function ContactPage() {
         email: values.email,
         message: values.message,
         phone: values.phone || undefined,
-        company: values.company || undefined,
       },
     });
   }
 
   return (
-    <>
-      <section className="section-padding bg-secondary-foreground">
-        <div className="site-container grid gap-6 lg:grid-cols-[1fr_1.1fr]">
-          <div className="space-y-3">
-            <Card>
-              <CardHeader>
-                <CardTitle>Canais de contato</CardTitle>
-                <CardDescription>Escolha a forma mais conveniente para você</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                {CONTACT.emails.map((email) => (
-                  <a
-                    key={email}
-                    href={`mailto:${email}`}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <Mail className="size-3.5 shrink-0" />
-                    {email}
-                  </a>
-                ))}
-                <a
-                  href={whatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
-                >
-                  <MessageCircle className="size-3.5 shrink-0" />
-                  WhatsApp: {CONTACT.whatsapp}
-                </a>
-              </CardContent>
-            </Card>
+    <section className="section-padding bg-background">
+      <div className="site-container grid gap-8 lg:grid-cols-[1.4fr_1fr] items-start">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">Formulário de contato</CardTitle>
+            <CardDescription>Dúvidas ou sugestões? Envie-nos uma mensagem</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="Nome Completo" autoComplete="name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <Button asChild size="lg" className="w-full sm:w-auto">
-              <a href={whatsappUrl("Olá! Gostaria de falar com a equipe DRECHSLER.")} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="size-4" />
-                Conversar no WhatsApp
-              </a>
-            </Button>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input type="email" placeholder="E-mail" autoComplete="email" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input type="tel" placeholder="Telefone" autoComplete="tel" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Textarea placeholder="Mensagem" rows={5} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit" variant="outline" disabled={isPending} className="w-full">
+                  {isPending ? (
+                    <>
+                      <Loader2 className="size-4 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    "Enviar"
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+
+        <div className="space-y-4 pt-2">
+          <div>
+            <h2 className="text-xl font-semibold mb-2 text-foreground">Contatos Rápidos</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+
+              Escolha a forma mais conveniente para você
+            </p>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Formulário de contato</CardTitle>
-              <CardDescription>Preencha os campos abaixo para enviar sua mensagem</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Nome</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Seu nome" autoComplete="name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+          <div className="divide-y divide-border">
+            {CONTACT.whatsapp  && (
+              <a
+                key={CONTACT.whatsapp}
+                href={`tel:${CONTACT.whatsapp}`}
+                className="flex items-start gap-3 py-3 text-sm text-foreground hover:text-muted-foreground transition-colors"
+              >
+                <Phone className="size-4 mt-0.5 shrink-0 text-muted-foreground" />
+                {CONTACT.whatsapp}
+              </a>
+            )}
 
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>E-mail</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="seu@email.com"
-                            autoComplete="email"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+            {CONTACT.emails.map((email) => (
+              <a
+                key={email}
+                href={`mailto:${email}`}
+                className="flex items-start gap-3 py-3 text-sm text-foreground hover:text-muted-foreground transition-colors"
+              >
+                <Mail className="size-4 mt-0.5 shrink-0 text-muted-foreground" />
+                {email}
+              </a>
+            ))}
 
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Telefone (opcional)</FormLabel>
-                          <FormControl>
-                            <Input placeholder="(12) 99999-9999" autoComplete="tel" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="company"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Empresa (opcional)</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Sua empresa" autoComplete="organization" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Mensagem</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Descreva como podemos ajudar..."
-                            rows={5}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <Button type="submit" disabled={isPending} className="w-full sm:w-auto">
-                    {isPending ? (
-                      <>
-                        <Loader2 className="size-4 animate-spin" />
-                        Enviando...
-                      </>
-                    ) : (
-                      "Enviar mensagem"
-                    )}
-                  </Button>
-                </form>
-              </Form>
-            </CardContent>
-          </Card>
+            {/**
+            {CONTACT.address && (
+              <div className="flex items-start gap-3 py-3 text-sm text-foreground">
+                <MapPin className="size-4 mt-0.5 shrink-0 text-muted-foreground" />
+                <span>{CONTACT.address}</span>
+              </div>
+            )}
+            */}
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
