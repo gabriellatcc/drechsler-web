@@ -67,14 +67,14 @@ export function AboutPage() {
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
             {DIFFERENTIALS.map((item) => (
-              <Card key={item.title} className="gap-1 overflow-hidden">
+              <Card key={item.title} className="gap-2 overflow-hidden">
                 <SiteIllustration
                   src={DIFFERENTIAL_IMAGES[item.title]}
                   alt={item.title}
                   aspect="video"
-                  className="rounded-none border-0 border-b shadow-none"
+                  className="rounded-none border-0 border-b shadow-none mx-4"
                 />
                 <CardHeader className="border-0 pb-0">
                   <CardTitle>{item.title}</CardTitle>

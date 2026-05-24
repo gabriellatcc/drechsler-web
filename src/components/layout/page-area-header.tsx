@@ -25,7 +25,7 @@ export function PageAreaHeader({ variant = "default", className }: PageAreaHeade
           delay={textRevealDelays.label}
           className={cn(
             "label-technical",
-            isHero ? "text-white/80" : "text-primary",
+            isHero ? "text-primary-foreground/80" : "text-primary",
           )}
         >
           {content.label}
@@ -38,7 +38,7 @@ export function PageAreaHeader({ variant = "default", className }: PageAreaHeade
         delay={textRevealDelays.title}
         className={cn(
           "heading-tight text-3xl md:text-4xl",
-          isHero && "text-white lg:text-5xl",
+          isHero && "text-primary-foreground lg:text-5xl",
         )}
       >
         {content.title}
@@ -50,7 +50,7 @@ export function PageAreaHeader({ variant = "default", className }: PageAreaHeade
         delay={textRevealDelays.description}
         className={cn(
           "text-sm leading-relaxed",
-          isHero ? "text-white/75" : "text-muted-foreground",
+          isHero ? "text-primary-foreground/75" : "text-muted-foreground",
         )}
       >
         {content.description}

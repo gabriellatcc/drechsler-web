@@ -1,12 +1,13 @@
 @import "tailwindcss";
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.9751 0.0127 244.2507);
+  --background: oklch(0.9755 0.0045 258.3245);
   --foreground: oklch(0.3729 0.0306 259.7328);
-  --card: oklch(1.0000 0 0);
-  --card-foreground: oklch(0.3729 0.0306 259.7328);
+  --card: oklch(0.9341 0.0132 251.5628);
+  --card-foreground: oklch(0.2558 0.0433 268.0662);
   --popover: oklch(1.0000 0 0);
   --popover-foreground: oklch(0.3729 0.0306 259.7328);
   --primary: oklch(0.7227 0.1920 149.5793);
@@ -39,20 +40,20 @@
   --font-serif: Lora, serif;
   --font-mono: IBM Plex Mono, monospace;
   --radius: 0.5rem;
-  --shadow-x: 0px;
-  --shadow-y: 4px;
+  --shadow-x: 0;
+  --shadow-y: 1px;
   --shadow-blur: 8px;
   --shadow-spread: -1px;
   --shadow-opacity: 0.1;
-  --shadow-color: hsl(0 0% 0%);
-  --shadow-2xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
-  --shadow: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 2px 4px -2px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 4px 6px -2px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 8px 10px -2px hsl(0 0% 0% / 0.10);
-  --shadow-2xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.25);
+  --shadow-color: #000000;
+  --shadow-2xs: 0 1px 8px -1px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 8px -1px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 1px 2px -2px hsl(0 0% 0% / 0.10);
+  --shadow: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 1px 2px -2px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 2px 4px -2px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 4px 6px -2px hsl(0 0% 0% / 0.10);
+  --shadow-xl: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 8px 10px -2px hsl(0 0% 0% / 0.10);
+  --shadow-2xl: 0 1px 8px -1px hsl(0 0% 0% / 0.25);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
@@ -94,20 +95,20 @@
   --font-serif: Lora, serif;
   --font-mono: IBM Plex Mono, monospace;
   --radius: 0.5rem;
-  --shadow-x: 0px;
-  --shadow-y: 4px;
+  --shadow-x: 0;
+  --shadow-y: 1px;
   --shadow-blur: 8px;
   --shadow-spread: -1px;
   --shadow-opacity: 0.1;
-  --shadow-color: hsl(0 0% 0%);
-  --shadow-2xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
-  --shadow-xs: 0px 4px 8px -1px hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
-  --shadow: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 1px 2px -2px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 2px 4px -2px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 4px 6px -2px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.10), 0px 8px 10px -2px hsl(0 0% 0% / 0.10);
-  --shadow-2xl: 0px 4px 8px -1px hsl(0 0% 0% / 0.25);
+  --shadow-color: #000000;
+  --shadow-2xs: 0 1px 8px -1px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 8px -1px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 1px 2px -2px hsl(0 0% 0% / 0.10);
+  --shadow: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 1px 2px -2px hsl(0 0% 0% / 0.10);
+  --shadow-md: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 2px 4px -2px hsl(0 0% 0% / 0.10);
+  --shadow-lg: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 4px 6px -2px hsl(0 0% 0% / 0.10);
+  --shadow-xl: 0 1px 8px -1px hsl(0 0% 0% / 0.10), 0 8px 10px -2px hsl(0 0% 0% / 0.10);
+  --shadow-2xl: 0 1px 8px -1px hsl(0 0% 0% / 0.25);
 }
 
 @theme inline {
@@ -178,7 +179,7 @@
 }
 
 .section-padding {
-  @apply py-10 md:py-14;
+  @apply pt-9 pb-10 md:pt-10 md:pb-14;
 }
 
 .hero-gradient {

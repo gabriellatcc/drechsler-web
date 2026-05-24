@@ -19,12 +19,12 @@ export function ServiceCard({
   linkLabel = "Saiba mais",
 }: ServiceCardProps) {
   return (
-    <div className="flex overflow-hidden rounded-sm border border-zinc-200 bg-card shadow-sm">
+    <div className="flex overflow-hidden rounded-sm border border-border bg-card shadow-sm">
       <SiteIllustration
         src={SERVICE_IMAGES[slug]}
         alt={title}
         aspect="auto"
-        className="w-24 shrink-0 rounded-none border-0 border-r border-zinc-200 sm:w-28"
+        className="w-24 shrink-0 rounded-none border-0 border-r border-border sm:w-28"
         imageClassName="size-full min-h-[6.5rem] object-cover"
       />
       <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">

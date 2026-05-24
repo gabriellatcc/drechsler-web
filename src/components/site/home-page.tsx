@@ -20,7 +20,7 @@ export function HomePage() {
     <>
       <section className="section-padding border-y bg-muted/20">
         <div className="site-container space-y-6">
-          <div className="space-y-2 border-l-4 border-zinc-900 pl-4">
+          <div className="space-y-2 border-l-4 border-foreground pl-4">
             <h2 className="heading-tight text-2xl md:text-3xl">Serviços</h2>
             <p className="text-sm text-muted-foreground">
               Amplo portfólio de soluções tecnológicas, analíticas, regulatórias e de
@@ -48,73 +48,73 @@ export function HomePage() {
       </section>
 
       <section className="section-padding">
-        <div className="site-container grid gap-8 lg:grid-cols-2">
-          <div className="space-y-4">
-            <SiteIllustration
-              src={SITE_IMAGES.homemAnotacoes}
-              alt="Pesquisador analisando estruturas químicas"
-              aspect="wide"
-            />
-            <div className="space-y-3">
-              <h2 className="heading-tight text-2xl md:text-3xl">Sobre a DRECHSLER</h2>
-              <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.intro}</p>
-              <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.custom}</p>
-              <Button asChild>
-                <Link to="/sobre">Conheça nossa história</Link>
-              </Button>
-            </div>
+        <div className="site-container grid gap-4 lg:grid-cols-2 lg:gap-6">
+          <SiteIllustration
+            src={SITE_IMAGES.homemAnotacoes}
+            alt="Pesquisador analisando estruturas químicas"
+            aspect="wide"
+            className="lg:row-span-2 lg:min-h-0 lg:h-full"
+          />
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Missão</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm leading-relaxed text-muted-foreground">
+              {MISSION_VISION_VALUES.mission}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Visão</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm leading-relaxed text-muted-foreground">
+              {MISSION_VISION_VALUES.vision}
+            </CardContent>
+          </Card>
+
+          <div className="space-y-3">
+            <h2 className="heading-tight text-2xl md:text-3xl">Sobre a DRECHSLER</h2>
+            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.intro}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.custom}</p>
+            <Button asChild>
+              <Link to="/sobre">Conheça nossa história</Link>
+            </Button>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Missão</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm leading-relaxed text-muted-foreground">
-                {MISSION_VISION_VALUES.mission}
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Visão</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm leading-relaxed text-muted-foreground">
-                {MISSION_VISION_VALUES.vision}
-              </CardContent>
-            </Card>
-            <Card className="sm:col-span-2">
-              <CardHeader>
-                <CardTitle>Valores</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="flex flex-wrap gap-2">
-                  {MISSION_VISION_VALUES.values.map((value) => (
-                    <li
-                      key={value}
-                      className="border border-border bg-secondary px-2 py-0.5 text-xs font-medium uppercase tracking-wider text-secondary-foreground"
-                    >
-                      {value}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>Valores</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="flex flex-wrap gap-2">
+                {MISSION_VISION_VALUES.values.map((value) => (
+                  <li
+                    key={value}
+                    className="border border-border bg-secondary px-2 py-0.5 text-xs font-medium uppercase tracking-wider text-secondary-foreground"
+                  >
+                    {value}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      <section className="section-padding border-t bg-primary text-primary-foreground">
+      <section className="section-padding border-t bg-background text-secondary-foreground">
         <div className="site-container mx-auto max-w-2xl space-y-3 text-center">
           <h2 className="heading-tight text-2xl md:text-3xl">Pronto para conversar?</h2>
-          <p className="text-sm text-primary-foreground/90">
+          <p className="text-sm text-secondary-foreground/90">
             Entre em contato e descubra como podemos apoiar seu projeto com soluções
             científicas customizadas e confidenciais.
           </p>
           <div className="flex flex-wrap justify-center gap-2 pt-2">
-            <Button asChild size="lg" variant="secondary">
-              <Link to="/contato">Enviar mensagem</Link>
+          <Button asChild size="lg" variant="outline" className="border-secondary-foreground/30 bg-transparent text-secondary-foreground hover:bg-secondary-foreground/10 hover:text-secondary-foreground">
+          <Link to="/contato">Enviar mensagem</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+            <Button asChild size="lg" variant="outline" className="border-secondary-foreground/30 bg-transparent text-secondary-foreground hover:bg-secondary-foreground/10 hover:text-secondary-foreground">
               <a href={whatsappUrl("Olá! Gostaria de falar com a equipe DRECHSLER.")} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="size-4" />
                 WhatsApp

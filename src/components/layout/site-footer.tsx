@@ -8,12 +8,11 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-muted/20">
+    <footer className="border-t border-border bg-secondary-foreground/10">
     <div className="site-container py-4">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3 mb-6">
         <div>
-          <p className="label-technical mb-2 text-foreground">Sobre</p>
-          <p className="text-sm leading-relaxed text-muted-foreground">
+        <p className="label-technical mb-2 font-bold text-foreground">Sobre</p>          <p className="text-sm leading-relaxed text-muted-foreground">
             {SITE.name}
           </p>
           <p className="text-xs leading-relaxed text-muted-foreground">
@@ -59,31 +58,24 @@ export function SiteFooter() {
                 </a>
               </li>
             )}
+            {CONTACT.linkedin && (
+            <li>
+                <a
+                  href={CONTACT.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 hover:text-foreground"
+                >
+                  <FaLinkedin className="size-3.5" />
+                  Drechsler Inovação & Tecnologia Química
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </div>
       <div className="flex flex-col items-center gap-2 border-t border-border pt-2 sm:flex-row sm:justify-between">
-        <div className="flex items-center gap-3">
-          {CONTACT.emails[0] && (
-            <a
-              href={`mailto:${CONTACT.emails[0]}`}
-              aria-label="E-mail"
-              className="rounded-full border border-border p-2 text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <Mail className="size-4" />
-            </a>
-          )}
-          <a
-            href={CONTACT.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="rounded-full border border-border p-2 text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <FaLinkedin className="size-4" />
-          </a>
-        </div>
-        <div className="flex flex-col items-center gap-0.5 sm:items-end">
+        <div className="flex w-full flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <p className="text-xs uppercase tracking-wider text-muted-foreground">
             © {year} {SITE.name}. Todos os direitos reservados.
           </p>
