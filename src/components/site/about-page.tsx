@@ -16,7 +16,7 @@ export function AboutPage() {
     <>
       <section className="section-padding border-b border-border bg-muted/20">
         <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div className="max-w-3xl space-y-3">
+          <div className="space-y-3">
             <p className="label-technical text-primary">Sobre</p>
             <h1 className="heading-tight text-3xl md:text-4xl">{SITE.name}</h1>
             <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.intro}</p>
@@ -76,7 +76,7 @@ export function AboutPage() {
 
       <section className="section-padding border-y border-border bg-muted/20">
         <div className="site-container space-y-6">
-          <div className="max-w-2xl space-y-2 border-b border-border pb-4">
+          <div className="space-y-2 border-b border-border pb-4">
             <h2 className="heading-tight text-xl md:text-2xl">Diferenciais</h2>
             <p className="text-sm text-muted-foreground">
               O que nos permite entregar resultados com segurança e qualidade.
@@ -106,7 +106,7 @@ export function AboutPage() {
 
       <section className="section-padding">
         <div className="site-container grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-          <div className="max-w-3xl space-y-4">
+          <div className="space-y-4">
             <h2 className="heading-tight text-xl md:text-2xl">Credenciais e atuação regulatória</h2>
             <ul className="space-y-2">
               {CREDENTIALS.map((credential) => (

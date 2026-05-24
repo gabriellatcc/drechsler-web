@@ -74,7 +74,7 @@ export function ContactPage() {
     <>
       <section className="section-padding border-b border-border bg-muted/20">
         <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div className="max-w-3xl space-y-3">
+          <div className="space-y-3">
             <p className="label-technical text-primary">Contato</p>
             <h1 className="heading-tight text-3xl md:text-4xl">Fale conosco</h1>
             <p className="text-sm leading-relaxed text-muted-foreground">

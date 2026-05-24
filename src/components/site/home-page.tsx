@@ -26,7 +26,7 @@ export function HomePage() {
             <h1 className="heading-tight text-3xl md:text-4xl lg:text-5xl">
               Inteligência científica para a indústria química e farmacêutica
             </h1>
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">{ABOUT.intro}</p>
+            <p className="text-sm leading-relaxed text-muted-foreground">{ABOUT.intro}</p>
             <div className="flex flex-wrap gap-2 pt-1">
               <Button asChild size="lg">
                 <Link to="/servicos">
@@ -68,7 +68,7 @@ export function HomePage() {
 
       <section className="section-padding border-y bg-muted/20">
         <div className="site-container space-y-6">
-          <div className="max-w-2xl space-y-2 border-l-4 border-zinc-900 pl-4">
+          <div className="space-y-2 border-l-4 border-zinc-900 pl-4">
             <h2 className="heading-tight text-2xl md:text-3xl">Serviços</h2>
             <p className="text-sm text-muted-foreground">
               Amplo portfólio de soluções tecnológicas, analíticas, regulatórias e de
@@ -153,7 +153,7 @@ export function HomePage() {
 
       <section className="section-padding border-t bg-primary text-primary-foreground">
         <div className="site-container grid items-center gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <div className="max-w-2xl space-y-3">
+          <div className="space-y-3">
             <h2 className="heading-tight text-2xl md:text-3xl">Pronto para conversar?</h2>
             <p className="text-sm text-primary-foreground/90">
               Entre em contato e descubra como podemos apoiar seu projeto com soluções

@@ -23,7 +23,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
     <>
       <section className="section-padding border-b border-border bg-muted/20">
         <div className="site-container grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
-          <div className="max-w-3xl space-y-4">
+          <div className="space-y-4">
             <Button asChild variant="ghost" className="h-auto p-0">
               <Link to="/servicos">
                 <ArrowLeft className="size-4" />
@@ -51,7 +51,7 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
       </section>
 
       <section className="section-padding">
-        <div className="site-container max-w-3xl space-y-6">
+        <div className="site-container space-y-6">
           <Card>
             <CardContent className="pt-4">
               <ul className="divide-y divide-border">
