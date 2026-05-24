@@ -39,7 +39,7 @@ if (!rootElement) {
 createRoot(rootElement).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light">
+      <ThemeProvider>
         <RouterProvider router={router} />
       </ThemeProvider>
     </QueryClientProvider>

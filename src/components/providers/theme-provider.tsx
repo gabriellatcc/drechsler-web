@@ -1,33 +1,38 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-type Theme = "light" | "dark";
-
-type ThemeProviderProps = {
-  children: ReactNode;
-  defaultTheme?: Theme;
-};
+import {
+  applyTheme,
+  resolveTheme,
+  THEME_STORAGE_KEY,
+  type Theme,
+} from "@/lib/theme";
 
 type ThemeProviderState = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
+  toggleTheme: () => void;
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState | undefined>(undefined);
 
-export function ThemeProvider({
-  children,
-  defaultTheme = "light",
-}: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
+type ThemeProviderProps = {
+  children: ReactNode;
+};
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  const [theme, setTheme] = useState<Theme>(() => resolveTheme());
 
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(theme);
+    applyTheme(theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [theme]);
 
+  const toggleTheme = () => {
+    setTheme((current) => (current === "light" ? "dark" : "light"));
+  };
+
   return (
-    <ThemeProviderContext.Provider value={{ theme, setTheme }}>
+    <ThemeProviderContext.Provider value={{ theme, setTheme, toggleTheme }}>
       {children}
     </ThemeProviderContext.Provider>
   );
