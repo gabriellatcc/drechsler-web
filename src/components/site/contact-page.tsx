@@ -13,7 +13,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useContactStore } from "@/generated/api/contact/contact";
+import { useContactMe } from "@/generated/api/contact/contact";
+import type { ContactMe200 } from "@/generated/api/models/contactMe200";
+import type { ContactMeBody } from "@/generated/api/models/contactMeBody";
 import { toastApiError, toastApiSuccess } from "@/lib/api-toast";
 import { CONTACT } from "@/lib/site-content";
 
@@ -37,27 +39,27 @@ export function ContactPage() {
     },
   });
 
-  const { mutate, isPending } = useContactStore({
+  const { mutate, isPending } = useContactMe({
     mutation: {
-      onSuccess: (data) => {
-        toastApiSuccess(data, "Mensagem enviada com sucesso!");
+      onSuccess: (data: ContactMe200) => {
+        toastApiSuccess(data);
         form.reset();
       },
-      onError: (error) => {
-        toastApiError(error, "Não foi possível enviar a mensagem");
+      onError: (error: unknown) => {
+        toastApiError(error);
       },
     },
   });
 
   function onSubmit(values: ContactFormValues) {
-    mutate({
-      data: {
-        name: values.name,
-        email: values.email,
-        message: values.message,
-        phone: values.phone || undefined,
-      },
-    });
+    const body: ContactMeBody = {
+      name: values.name,
+      email: values.email,
+      phone: values.phone ?? "",
+      company: "",
+      message: values.message,
+    };
+    mutate({ data: body });
   }
 
   return (
