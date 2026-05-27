@@ -1,4 +1,4 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 import { PublicLayout } from "@/components/layout/public-layout";
@@ -10,11 +10,18 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const isAdminRoute = pathname.startsWith("/admin");
+
   return (
     <>
-      <PublicLayout>
+      {isAdminRoute ? (
         <Outlet />
-      </PublicLayout>
+      ) : (
+        <PublicLayout>
+          <Outlet />
+        </PublicLayout>
+      )}
       <ThemeToggle />
       <Toaster richColors position="top-right" />
       {import.meta.env.DEV ? <TanStackRouterDevtools position="bottom-right" /> : null}
