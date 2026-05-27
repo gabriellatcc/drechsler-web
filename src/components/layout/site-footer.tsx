@@ -2,9 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { Mail, Phone } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-import { CONTACT, NAV_ITEMS, SITE } from "@/lib/site-content";
+import { useSiteNavItems } from "@/hooks/use-site-nav-items";
+import { CONTACT, SITE } from "@/lib/site-content";
 
 export function SiteFooter() {
+  const navItems = useSiteNavItems();
   const year = new Date().getFullYear();
 
   return (
@@ -22,7 +24,7 @@ export function SiteFooter() {
         <div>
           <p className="label-technical mb-2 text-foreground">Navegação</p>
           <ul className="space-y-1.5 text-sm text-muted-foreground">
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <li key={item.to}>
                 <Link to={item.to} className="hover:text-foreground">
                   {item.label}

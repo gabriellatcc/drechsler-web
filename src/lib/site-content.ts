@@ -228,9 +228,38 @@ export function getServiceBySlug(slug: string): Service | undefined {
   return SERVICES.find((service) => service.slug === slug);
 }
 
-export const NAV_ITEMS = [
+export const HOME_FEATURED_SERVICE_SLUGS = [
+  "desenvolvimento-produtos",
+  "sinteses-padroes",
+  "servicos-analiticos",
+  "propriedade-intelectual",
+  "cursos-treinamentos",
+  "degradacao-forcada",
+] as const;
+
+export function getHomeFeaturedServices(): Service[] {
+  return HOME_FEATURED_SERVICE_SLUGS.flatMap((slug) => {
+    const service = getServiceBySlug(slug);
+    return service ? [service] : [];
+  });
+}
+
+export type SiteNavItem = {
+  label: string;
+  to: "/" | "/sobre" | "/servicos" | "/blog" | "/contato";
+};
+
+export const BASE_NAV_ITEMS = [
   { label: "Início", to: "/" as const },
   { label: "Sobre", to: "/sobre" as const },
   { label: "Serviços", to: "/servicos" as const },
   { label: "Contato", to: "/contato" as const },
-] as const;
+] as const satisfies readonly SiteNavItem[];
+
+export const BLOG_NAV_ITEM = {
+  label: "Publicações",
+  to: "/blog" as const,
+} satisfies SiteNavItem;
+
+/** @deprecated Use `useSiteNavItems()` para incluir Publicações quando houver posts ativos. */
+export const NAV_ITEMS = BASE_NAV_ITEMS;

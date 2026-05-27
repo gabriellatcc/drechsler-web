@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 
 import { useTheme } from "@/components/providers/theme-provider";
 import { Button } from "@/components/ui/button";
+import { useSiteNavItems } from "@/hooks/use-site-nav-items";
 import { SITE_IMAGES } from "@/lib/site-images";
-import { CONTACT, NAV_ITEMS, whatsappUrl } from "@/lib/site-content";
+import { CONTACT, whatsappUrl } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const { theme } = useTheme();
+  const navItems = useSiteNavItems();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -43,7 +45,7 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-5 md:flex">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.to}
               to={item.to}
@@ -82,7 +84,7 @@ export function SiteHeader() {
         )}
       >
         <nav className="site-container flex flex-col gap-0 py-2">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.to}
               to={item.to}

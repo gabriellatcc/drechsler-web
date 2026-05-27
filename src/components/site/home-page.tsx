@@ -6,14 +6,14 @@ import { SiteIllustration } from "@/components/site/site-illustration";
 import { Button } from "@/components/ui/button";
 import {
   ABOUT,
+  getHomeFeaturedServices,
   MISSION_VISION_VALUES,
-  SERVICES,
   whatsappUrl,
 } from "@/lib/site-content";
 import { SITE_IMAGES } from "@/lib/site-images";
 
 export function HomePage() {
-  const featuredServices = SERVICES.slice(0, 6);
+  const featuredServices = getHomeFeaturedServices();
 
   return (
     <>

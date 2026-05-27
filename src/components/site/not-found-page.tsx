@@ -9,7 +9,7 @@ import { SITE } from "@/lib/site-content";
 type NotFoundPageProps = {
   documentTitle?: string;
   homeLabel?: string;
-  secondaryAction?: { to: "/servicos"; label: string };
+  secondaryAction?: { to: "/servicos" | "/blog"; label: string };
 };
 
 export function RootNotFoundPage(_props: NotFoundRouteProps) {

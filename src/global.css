@@ -206,3 +206,11 @@
 .heading-tight {
   @apply font-bold tracking-tight leading-tight;
 }
+
+.blog-publication-item {
+  @apply py-8 first:pt-0 last:pb-0;
+}
+
+.blog-article-body {
+  @apply text-pretty;
+}

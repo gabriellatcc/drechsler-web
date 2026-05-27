@@ -4,6 +4,9 @@ export type PageSegmentKey =
   | "home"
   | "sobre"
   | "servicos"
+  | "blog"
+  | "blog-post-detail"
+  | "blog-post-not-found"
   | "contato"
   | "service-detail"
   | "service-not-found"
@@ -16,7 +19,7 @@ export type PageContentEntry = {
 };
 
 export const PAGE_CONTENT: Record<
-  Exclude<PageSegmentKey, "service-detail">,
+  Exclude<PageSegmentKey, "service-detail" | "blog-post-detail">,
   PageContentEntry
 > = {
   home: {
@@ -34,6 +37,16 @@ export const PAGE_CONTENT: Record<
     title: "Nossos serviços",
     description:
       "Soluções tecnológicas, analíticas, regulatórias e de treinamento para atender clientes nos setores químico, farmacêutico e regulatório.",
+  },
+  blog: {
+    label: "Publicações",
+    title: "Publicações científicas",
+    description:
+      "Artigos, notas técnicas e conteúdos elaborados pela equipe DRECHSLER sobre química, regulatório e inovação.",
+  },
+  "blog-post-not-found": {
+    title: "Publicação não encontrada",
+    description: "A publicação solicitada não existe ou não está mais disponível.",
   },
   contato: {
     label: "Contato",
@@ -62,6 +75,7 @@ const NAV_HEADER_SEGMENTS: PageSegmentKey[] = [
   "home",
   "sobre",
   "servicos",
+  "blog",
   "contato",
 ];
 
@@ -101,6 +115,24 @@ export function resolvePageSegment(pathname: string, slug?: string): ResolvedPag
       segment: "contato",
       animationKey: "contato",
       ...PAGE_CONTENT.contato,
+    };
+  }
+
+  if (normalizedPath === "/blog") {
+    return {
+      segment: "blog",
+      animationKey: "blog",
+      ...PAGE_CONTENT.blog,
+    };
+  }
+
+  if (normalizedPath.startsWith("/blog/") && slug) {
+    return {
+      segment: "blog-post-detail",
+      animationKey: `blog-post-detail:${slug}`,
+      label: "Publicação",
+      title: slug,
+      description: "Conteúdo técnico e científico publicado pela DRECHSLER.",
     };
   }
 
