@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Calendar, Loader2, User } from "lucide-react";
+import { ArrowLeft, Calendar, Loader2 } from "lucide-react";
 
 import { NotFoundPage } from "@/components/site/not-found-page";
 import { PageHeroBand } from "@/components/layout/page-hero-band";
