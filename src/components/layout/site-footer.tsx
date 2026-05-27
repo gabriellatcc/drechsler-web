@@ -76,9 +76,17 @@ export function SiteFooter() {
       </div>
       <div className="flex flex-col items-center gap-2 border-t border-border pt-2 sm:flex-row sm:justify-between">
         <div className="flex w-full flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">
-            © {year} {SITE.name}. Todos os direitos reservados.
-          </p>
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">
+              © {year} {SITE.name}. Todos os direitos reservados.
+            </p>
+            <Link
+              to="/privacidade"
+              className="text-xs text-foreground transition-colors hover:text-foreground"
+            >
+              Política de Privacidade
+            </Link>
+          </div>
           <a
             href="https://github.com/gabriellatcc"
             target="_blank"
