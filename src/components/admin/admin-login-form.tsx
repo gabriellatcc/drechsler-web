@@ -72,7 +72,7 @@ export function AdminLoginForm() {
                     autoComplete="current-password"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    className="pr-10"
+                    className="pr-10 [&::-ms-clear]:hidden [&::-ms-reveal]:hidden [&::-webkit-credentials-auto-fill-button]:hidden"
                     required
                   />
                   <button
