@@ -1,8 +1,14 @@
-import { defineConfig } from "orval";
+import { defineConfig, defineTransformer } from "orval";
+import sanitizeInvalidComponentKeys from "./orval-input-transformer";
 
 export default defineConfig({
   drechsler: {
-    input: "./swagger.json",
+    input: {
+      target: "./swagger.json",
+      override: {
+        transformer: defineTransformer(sanitizeInvalidComponentKeys),
+      },
+    },
     output: {
       mode: "tags-split",
       target: "./src/generated/api",
