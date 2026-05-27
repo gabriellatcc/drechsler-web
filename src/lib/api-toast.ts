@@ -3,10 +3,17 @@ import { toast } from "sonner";
 
 type ApiFieldErrors = Record<string, string[] | string>;
 
+const DEFAULT_API_SUCCESS_MESSAGE = "Formulário enviado com sucesso";
+
 type ApiErrorBody = {
+  success?: boolean;
   message?: string;
   error?: string;
   errors?: ApiFieldErrors;
+  data?: {
+    message?: string;
+    statusCode?: number;
+  } | null;
 };
 
 function firstFieldError(errors: ApiFieldErrors): string | undefined {
@@ -17,18 +24,36 @@ function firstFieldError(errors: ApiFieldErrors): string | undefined {
   return undefined;
 }
 
+function nestedApiMessage(data: ApiErrorBody): string | undefined {
+  if (typeof data.data === "object" && data.data !== null && data.data.message) {
+    return data.data.message;
+  }
+
+  return undefined;
+}
+
 export function getApiErrorMessage(error: unknown, fallback = "Ocorreu um erro inesperado."): string {
   if (axios.isAxiosError(error)) {
     const status = error.response?.status;
     const data = error.response?.data as ApiErrorBody | undefined;
 
-    if (data?.message) return data.message;
-    if (data?.error) return data.error;
-
     if (data?.errors) {
       const fieldError = firstFieldError(data.errors);
       if (fieldError) return fieldError;
     }
+
+    if (
+      data?.message &&
+      data.message !== DEFAULT_API_SUCCESS_MESSAGE &&
+      data.success !== true
+    ) {
+      return data.message;
+    }
+
+    const wrappedMessage = data ? nestedApiMessage(data) : undefined;
+    if (wrappedMessage) return wrappedMessage;
+
+    if (data?.error) return data.error;
 
     if (status === 401) return "Sessão expirada. Faça login novamente.";
     if (status === 403 || status === 404) return "Recurso não encontrado.";
@@ -45,9 +70,13 @@ export function getApiErrorMessage(error: unknown, fallback = "Ocorreu um erro i
   return fallback;
 }
 
-export function toastApiError(error: unknown, title = "Erro"): void {
+export function toastApiError(
+  error: unknown,
+  title = "Erro",
+  fallback?: string,
+): void {
   toast.error(title, {
-    description: getApiErrorMessage(error),
+    description: getApiErrorMessage(error, fallback),
   });
 }
 

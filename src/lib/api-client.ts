@@ -44,11 +44,18 @@ export function clearAuthAccessToken(): void {
   window.dispatchEvent(new Event(AUTH_EVENT_NAME));
 }
 
+function normalizeRequestUrl(url: string | undefined): string | undefined {
+  if (!url?.startsWith("/")) return url;
+  return url.slice(1);
+}
+
 axiosInstance.interceptors.request.use((config) => {
   const token = getAuthAccessToken();
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  config.url = normalizeRequestUrl(config.url);
   return config;
 });
 

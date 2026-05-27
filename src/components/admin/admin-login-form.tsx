@@ -27,7 +27,11 @@ export function AdminLoginForm() {
         void navigate({ to: "/admin/dashboard" });
       },
       onError: (error: unknown) => {
-        toastApiError(error, "Falha no login");
+        toastApiError(
+          error,
+          "Falha no login",
+          "Não foi possível entrar. Verifique e-mail e senha.",
+        );
       },
     },
   });
