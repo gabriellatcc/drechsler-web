@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useContactMe } from "@/generated/api/contact/contact";
-import type { ContactMe200 } from "@/generated/api/models/contactMe200";
-import type { ContactMeBody } from "@/generated/api/models/contactMeBody";
+import { useContactCreate } from "@/generated/api/contact/contact";
+import type { ContactCreate200 } from "@/generated/api/models/contactCreate200";
+import type { ContactCreateBody } from "@/generated/api/models/contactCreateBody";
 import { toastApiError, toastApiSuccess } from "@/lib/api-toast";
 import { CONTACT } from "@/lib/site-content";
 
@@ -39,9 +39,9 @@ export function ContactPage() {
     },
   });
 
-  const { mutate, isPending } = useContactMe({
+  const { mutate, isPending } = useContactCreate({
     mutation: {
-      onSuccess: (data: ContactMe200) => {
+      onSuccess: (data: ContactCreate200) => {
         toastApiSuccess(data);
         form.reset();
       },
@@ -52,7 +52,7 @@ export function ContactPage() {
   });
 
   function onSubmit(values: ContactFormValues) {
-    const body: ContactMeBody = {
+    const body: ContactCreateBody = {
       name: values.name,
       email: values.email,
       phone: values.phone ?? "",
