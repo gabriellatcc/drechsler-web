@@ -341,7 +341,7 @@ function BlogPostsSection() {
         title="Postagens do blog"
         icon={Newspaper}
         headerAction={
-          <Button variant="outline" size="sm" onClick={openCreateForm}>
+          <Button variant="default" size="sm" onClick={openCreateForm}>
             <Plus className="size-4" />
             Criar uma nova postagem
           </Button>

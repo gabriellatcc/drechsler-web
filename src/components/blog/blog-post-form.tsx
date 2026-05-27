@@ -218,7 +218,7 @@ export function BlogPostFormDialog({
                   <FormLabel>Imagem de capa (URL)</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="https://exemplo.com/capa.jpg"
+                      placeholder="https://exemplo.com "
                       disabled={isEdit}
                       {...field}
                     />
