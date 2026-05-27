@@ -1,11 +1,12 @@
 import { useNavigate } from "@tanstack/react-router";
 import { File, Loader2, MoreHorizontal, Newspaper, Pencil, Plus, Send, Trash2, Undo2 } from "lucide-react";
-import { useState } from "react";
+import { useState, type KeyboardEvent, type SyntheticEvent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { PaginatedListPanel } from "@/components/admin/paginated-list-panel";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { BlogPostDeleteAlertDialog } from "@/components/blog/blog-post-delete-alert-dialog";
+import { BlogPostDetailDialog } from "@/components/blog/blog-post-detail-dialog";
 import { BlogPostFormDialog } from "@/components/blog/blog-post-form";
 import { Button } from "@/components/ui/button";
 import {
@@ -88,6 +89,7 @@ type BlogPostListItem = Pick<
 
 type BlogPostItemProps = {
   post: BlogPostListItem;
+  onView: (post: BlogPostListItem) => void;
   onEdit: (post: BlogPostListItem) => void;
   onTogglePublish: (post: BlogPostListItem) => void;
   onDelete: (post: BlogPostListItem) => void;
@@ -96,6 +98,7 @@ type BlogPostItemProps = {
 
 function BlogPostItem({
   post,
+  onView,
   onEdit,
   onTogglePublish,
   onDelete,
@@ -104,8 +107,34 @@ function BlogPostItem({
   const isPublished = post.status === BlogPostResourceStatus.PUBLISHED;
   const authorName = post.author?.name;
 
+  function handleCardClick() {
+    onView(post);
+  }
+
+  function handleCardKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onView(post);
+    }
+  }
+
+  function stopPropagation(event: SyntheticEvent) {
+    event.stopPropagation();
+  }
+
   return (
-    <article className="space-y-2 rounded-sm border border-border bg-card p-3">
+    <article
+      role="button"
+      tabIndex={0}
+      aria-label={`Ver detalhes de ${post.title}`}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      className={cn(
+        "space-y-2 rounded-sm border border-border bg-card p-3 transition-colors",
+        "cursor-pointer hover:border-primary/40 hover:bg-muted/20",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+      )}
+    >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1 space-y-2">
           <div className="flex flex-wrap items-start justify-between gap-2">
@@ -133,15 +162,16 @@ function BlogPostItem({
           </div>
         </div>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              className="shrink-0"
-              aria-label="Ações da postagem"
-              disabled={isPublishing}
-            >
+        <div onClick={stopPropagation} onKeyDown={stopPropagation}>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="shrink-0"
+                aria-label="Ações da postagem"
+                disabled={isPublishing}
+              >
               {isPublishing ? (
                 <Loader2 className="size-4 animate-spin" />
               ) : (
@@ -172,8 +202,9 @@ function BlogPostItem({
               <Trash2 />
               Excluir
             </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </article>
   );
@@ -237,6 +268,8 @@ function BlogPostsSection() {
   const [selectedPost, setSelectedPost] = useState<BlogPostListItem | null>(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [postToDelete, setPostToDelete] = useState<BlogPostListItem | null>(null);
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [viewingPostId, setViewingPostId] = useState<string | null>(null);
   const [publishingPostId, setPublishingPostId] = useState<string | null>(null);
 
   const {
@@ -285,6 +318,11 @@ function BlogPostsSection() {
     setDeleteOpen(true);
   }
 
+  function openDetailDialog(post: BlogPostListItem) {
+    setViewingPostId(post.id);
+    setDetailOpen(true);
+  }
+
   function handleTogglePublish(post: BlogPostListItem) {
     const nextStatus =
       post.status === BlogPostResourceStatus.PUBLISHED
@@ -313,6 +351,7 @@ function BlogPostsSection() {
         renderItem={(post) => (
           <BlogPostItem
             post={post}
+            onView={openDetailDialog}
             onEdit={openEditForm}
             onTogglePublish={handleTogglePublish}
             onDelete={openDeleteDialog}
@@ -330,6 +369,12 @@ function BlogPostsSection() {
         perPageOptions={pagination.perPageOptions}
         onPageChange={pagination.setPage}
         onPerPageChange={pagination.setPerPage}
+      />
+
+      <BlogPostDetailDialog
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        postId={viewingPostId}
       />
 
       <BlogPostFormDialog
