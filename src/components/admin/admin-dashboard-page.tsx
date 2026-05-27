@@ -1,20 +1,20 @@
 import { useNavigate } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight, File, Loader2, Newspaper } from "lucide-react";
-import { useState } from "react";
+import { File, Newspaper } from "lucide-react";
 
+import { PaginatedListPanel } from "@/components/admin/paginated-list-panel";
 import { AdminShell } from "@/components/admin/admin-shell";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Route } from "@/routes/admin.dashboard";
 import { useAuthMe } from "@/generated/api/auth/auth";
 import { useBlogListPostsDrafts } from "@/generated/api/blog/blog";
 import { useContactListSubmissions } from "@/generated/api/contact/contact";
 import type { BlogPostResource } from "@/generated/api/models/blogPostResource";
 import { BlogPostResourceStatus } from "@/generated/api/models/blogPostResourceStatus";
 import type { ContactResource } from "@/generated/api/models/contactResource";
+import { usePaginatedLastPageGuard, usePaginatedList } from "@/hooks/use-paginated-list";
 import { cn } from "@/lib/utils";
 
-const BLOG_PER_PAGE = 10;
+const CONTACT_STORAGE_KEY = "admin-contact:list-per-page";
+const BLOG_STORAGE_KEY = "admin-blog:list-per-page";
 
 function formatDate(value: string): string {
   return new Date(value).toLocaleDateString("pt-BR", {
@@ -86,44 +86,95 @@ function BlogPostItem({ post }: { post: BlogPostListItem }) {
   );
 }
 
-function EmptyState({ icon: Icon, message }: { icon: typeof File; message: string }) {
+function ContactSubmissionsSection() {
+  const search = Route.useSearch();
+  const pagination = usePaginatedList({
+    storageKey: CONTACT_STORAGE_KEY,
+    pageKey: "contact_page",
+    perPageKey: "contact_per_page",
+    search,
+  });
+
+  const {
+    data,
+    isLoading,
+    isFetching,
+    isError,
+  } = useContactListSubmissions(pagination.apiParams);
+
+  const items = data?.data.data ?? [];
+  const meta = data?.data.meta;
+
+  usePaginatedLastPageGuard(pagination.page, meta?.lastPage, pagination.setPage);
+
   return (
-    <div className="flex flex-col items-center justify-center gap-2 py-10 text-center text-muted-foreground">
-      <Icon className="size-8 opacity-50" />
-      <p className="text-sm">{message}</p>
-    </div>
+    <PaginatedListPanel
+      title="Formulários preenchidos"
+      icon={File}
+      items={items}
+      getItemKey={(submission) => submission.id}
+      renderItem={(submission) => <ContactSubmissionItem submission={submission} />}
+      isLoading={isLoading}
+      isFetching={isFetching}
+      isError={isError}
+      emptyMessage="Nenhum formulário recebido ainda."
+      errorMessage="Não foi possível carregar os formulários."
+      itemLabel="formulários"
+      meta={meta}
+      perPage={pagination.perPage}
+      perPageOptions={pagination.perPageOptions}
+      onPageChange={pagination.setPage}
+      onPerPageChange={pagination.setPerPage}
+    />
   );
 }
 
-function LoadingState() {
+function BlogPostsSection() {
+  const search = Route.useSearch();
+  const pagination = usePaginatedList({
+    storageKey: BLOG_STORAGE_KEY,
+    pageKey: "blog_page",
+    perPageKey: "blog_per_page",
+    search,
+  });
+
+  const {
+    data,
+    isLoading,
+    isFetching,
+    isError,
+  } = useBlogListPostsDrafts(pagination.apiParams);
+
+  const items = data?.data.data ?? [];
+  const meta = data?.data.meta;
+
+  usePaginatedLastPageGuard(pagination.page, meta?.lastPage, pagination.setPage);
+
   return (
-    <div className="flex items-center justify-center py-10 text-muted-foreground">
-      <Loader2 className="size-6 animate-spin" />
-    </div>
+    <PaginatedListPanel
+      title="Postagens do blog"
+      icon={Newspaper}
+      items={items}
+      getItemKey={(post) => post.id}
+      renderItem={(post) => <BlogPostItem post={post} />}
+      isLoading={isLoading}
+      isFetching={isFetching}
+      isError={isError}
+      emptyMessage="Nenhuma postagem cadastrada."
+      errorMessage="Não foi possível carregar as postagens."
+      itemLabel="postagens"
+      meta={meta}
+      perPage={pagination.perPage}
+      perPageOptions={pagination.perPageOptions}
+      onPageChange={pagination.setPage}
+      onPerPageChange={pagination.setPerPage}
+    />
   );
 }
 
 export function AdminDashboardPage() {
   const navigate = useNavigate();
-  const [blogPage, setBlogPage] = useState(1);
-
   const { data: meData } = useAuthMe();
-
-  const {
-    data: submissionsData,
-    isLoading: submissionsLoading,
-    isError: submissionsError,
-  } = useContactListSubmissions({ perPage: 100 });
-
-  const {
-    data: postsData,
-    isLoading: postsLoading,
-    isError: postsError,
-  } = useBlogListPostsDrafts({ page: blogPage, perPage: BLOG_PER_PAGE });
-
-  const submissions = submissionsData?.data.data ?? [];
-  const posts = postsData?.data.data ?? [];
-  const postsMeta = postsData?.data.meta;
 
   function handleLogout() {
     void navigate({ to: "/admin" });
@@ -134,90 +185,22 @@ export function AdminDashboardPage() {
       title={meData?.data.name ? `Olá, ${meData.data.name}` : "Painel administrativo"}
       onLogout={handleLogout}
     >
-      <div className="site-container flex flex-1 flex-col py-6 md:py-8">
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">
+      <div className="flex min-h-0 flex-1 flex-col">
+        <div className="site-container shrink-0 py-6 md:py-8">
+          <h1 className="font-serif text-2xl font-semibold tracking-tight">Dashboard</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
             Formulários recebidos e postagens do blog em um só lugar.
           </p>
         </div>
 
-        <div className="grid min-h-0 flex-1 gap-6 lg:grid-cols-2">
-          <Card className="flex min-h-[420px] flex-col lg:min-h-[calc(100vh-12rem)]">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <File className="size-5" />
-                Formulários preenchidos
-              </CardTitle>
-            </CardHeader>
-            <Separator />
-            <CardContent className="flex flex-1 flex-col gap-3 overflow-y-auto pt-4">
-              {submissionsLoading ? <LoadingState /> : null}
-              {submissionsError ? (
-                <EmptyState icon={File} message="Não foi possível carregar os formulários." />
-              ) : null}
-              {!submissionsLoading && !submissionsError && submissions.length === 0 ? (
-                <EmptyState icon={File} message="Nenhum formulário recebido ainda." />
-              ) : null}
-              {!submissionsLoading && !submissionsError
-                ? submissions.map((submission) => (
-                    <ContactSubmissionItem key={submission.id} submission={submission} />
-                  ))
-                : null}
-            </CardContent>
-          </Card>
+        <div className="flex min-h-0 flex-1 flex-col border-t border-border">
+          <section className="flex min-h-[50vh] min-w-0 flex-col border-b border-border">
+            <BlogPostsSection />
+          </section>
 
-          <Card className="flex min-h-[420px] flex-col lg:min-h-[calc(100vh-12rem)]">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Newspaper className="size-5" />
-                Postagens do blog
-              </CardTitle>
-            </CardHeader>
-            <Separator />
-            <CardContent className="flex flex-1 flex-col gap-3 overflow-y-auto pt-4">
-              {postsLoading ? <LoadingState /> : null}
-              {postsError ? (
-                <EmptyState icon={Newspaper} message="Não foi possível carregar as postagens." />
-              ) : null}
-              {!postsLoading && !postsError && posts.length === 0 ? (
-                <EmptyState icon={Newspaper} message="Nenhuma postagem cadastrada." />
-              ) : null}
-              {!postsLoading && !postsError
-                ? posts.map((post) => <BlogPostItem key={post.id} post={post} />)
-                : null}
-
-              {postsMeta && postsMeta.lastPage > 1 ? (
-                <div className="mt-auto flex items-center justify-between gap-3 border-t border-border pt-4">
-                  <p className="text-xs text-muted-foreground">
-                    Página {postsMeta.page} de {postsMeta.lastPage} · {postsMeta.total} postagens
-                  </p>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      disabled={blogPage <= 1 || postsLoading}
-                      onClick={() => setBlogPage((page) => Math.max(1, page - 1))}
-                    >
-                      <ChevronLeft className="size-4" />
-                      Anterior
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      disabled={blogPage >= postsMeta.lastPage || postsLoading}
-                      onClick={() => setBlogPage((page) => page + 1)}
-                    >
-                      Próxima
-                      <ChevronRight className="size-4" />
-                    </Button>
-                  </div>
-                </div>
-              ) : null}
-            </CardContent>
-          </Card>
+          <section className="flex min-h-[50vh] min-w-0 flex-col">
+            <ContactSubmissionsSection />
+          </section>
         </div>
       </div>
     </AdminShell>
