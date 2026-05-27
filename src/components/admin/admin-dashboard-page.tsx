@@ -185,20 +185,20 @@ export function AdminDashboardPage() {
       title={meData?.data.name ? `Olá, ${meData.data.name}` : "Painel administrativo"}
       onLogout={handleLogout}
     >
-      <div className="flex min-h-0 flex-1 flex-col">
-        <div className="site-container shrink-0 py-6 md:py-8">
+      <div className="site-container flex w-full flex-1 flex-col gap-8 py-6 md:py-8 md:pb-10">
+        <header>
           <h1 className="font-serif text-2xl font-semibold tracking-tight">Dashboard</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Formulários recebidos e postagens do blog em um só lugar.
           </p>
-        </div>
+        </header>
 
-        <div className="flex min-h-0 flex-1 flex-col border-t border-border">
-          <section className="flex min-h-[50vh] min-w-0 flex-col border-b border-border">
+        <div className="flex flex-col gap-8">
+          <section className="flex min-h-[28rem] flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
             <BlogPostsSection />
           </section>
 
-          <section className="flex min-h-[50vh] min-w-0 flex-col">
+          <section className="flex min-h-[28rem] flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
             <ContactSubmissionsSection />
           </section>
         </div>

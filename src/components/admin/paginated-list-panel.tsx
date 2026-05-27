@@ -63,14 +63,14 @@ export function PaginatedListPanel<T>({
   const showEmpty = !isLoading && !isError && items.length === 0;
 
   return (
-    <div className="flex h-full min-h-0 flex-1 flex-col bg-card">
-      <div className="shrink-0 border-b border-border px-5 py-4 md:px-6">
-        <h2 className="font-serif text-xl font-semibold tracking-tight text-card-foreground flex items-center gap-2.5">
+    <div className="flex h-full min-h-0 flex-1 flex-col">
+      <div className="shrink-0 border-b border-border px-4 py-4 sm:px-6">
+        <h2 className="flex items-center gap-2.5 font-serif text-xl font-semibold tracking-tight text-card-foreground">
           <Icon className="size-5 shrink-0 text-primary" />
           {title}
         </h2>
       </div>
-      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-5 py-4 md:px-6">
+      <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 py-4 sm:px-6">
         {isLoading ? <LoadingState /> : null}
         {isError ? <EmptyState icon={Icon} message={errorMessage} /> : null}
         {showEmpty ? <EmptyState icon={Icon} message={emptyMessage} /> : null}
