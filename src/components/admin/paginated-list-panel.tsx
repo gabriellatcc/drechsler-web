@@ -9,6 +9,7 @@ import type { PerPageOption } from "@/lib/pagination/constants";
 type PaginatedListPanelProps<T> = {
   title: string;
   icon: LucideIcon;
+  headerAction?: ReactNode;
   items: T[];
   getItemKey: (item: T) => string;
   renderItem: (item: T) => ReactNode;
@@ -45,6 +46,7 @@ function LoadingState() {
 export function PaginatedListPanel<T>({
   title,
   icon: Icon,
+  headerAction,
   items,
   getItemKey,
   renderItem,
@@ -65,10 +67,13 @@ export function PaginatedListPanel<T>({
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
       <div className="shrink-0 border-b border-border px-4 py-4 sm:px-6">
-        <h2 className="flex items-center gap-2.5 font-serif text-xl font-semibold tracking-tight text-card-foreground">
-          <Icon className="size-5 shrink-0 text-primary" />
-          {title}
-        </h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="flex items-center gap-2.5 font-serif text-xl font-semibold tracking-tight text-card-foreground">
+            <Icon className="size-5 shrink-0 text-primary" />
+            {title}
+          </h2>
+          {headerAction}
+        </div>
       </div>
       <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 py-4 sm:px-6">
         {isLoading ? <LoadingState /> : null}
