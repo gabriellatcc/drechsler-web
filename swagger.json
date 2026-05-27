@@ -1,82 +1,1371 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.0.1",
   "info": {
-    "title": "Drechsler API",
+    "title": "Default module",
+    "description": "",
     "version": "1.0.0"
   },
+  "tags": [
+    {
+      "name": "contact"
+    },
+    {
+      "name": "blog"
+    },
+    {
+      "name": "auth"
+    }
+  ],
   "paths": {
-    "/api/contact": {
+    "/contact": {
       "post": {
-        "tags": ["contact"],
-        "operationId": "contactStore",
-        "summary": "Enviar mensagem de contato",
+        "summary": "Create Contact",
+        "deprecated": false,
+        "description": "Envia uma mensagem pelo formulário de contato.",
+        "operationId": "contactMe",
+        "tags": [
+          "contact"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ContactStoreRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Mensagem enviada",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContactStoreResponse"
-                }
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "company": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "phone",
+                  "company",
+                  "message"
+                ]
+              },
+              "example": {
+                "name": "João Silva",
+                "email": "joao@exemplo.com",
+                "phone": "11999998888",
+                "company": "Empresa XYZ",
+                "message": "Gostaria de saber mais sobre os serviços oferecidos."
               }
             }
           },
-          "422": {
-            "description": "Erro de validação"
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "null"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": null,
+                  "message": "Mensagem enviada com sucesso!"
+                }
+              }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": []
+      }
+    },
+    "/admin/contact-submissions": {
+      "get": {
+        "summary": "List Contact Submissions",
+        "deprecated": false,
+        "description": "Lista mensagens de contato (paginado).",
+        "operationId": "contactListSubmissions",
+        "tags": [
+          "contact"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": 15,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Contact%20Resource"
+                          }
+                        },
+                        "meta": {
+                          "$ref": "#/components/schemas/Pagination%20Resource"
+                        }
+                      },
+                      "required": [
+                        "data",
+                        "meta"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "data": [
+                      {
+                        "id": "cmpncaf1d0002v8iwqftn31f9",
+                        "name": "João Silva",
+                        "email": "joao@exemplo.com",
+                        "phone": "11999998888",
+                        "company": "Empresa XYZ",
+                        "message": "Gostaria de saber mais sobre os serviços oferecidos.",
+                        "createdAt": "2026-05-27T00:42:11.995Z"
+                      },
+                      {
+                        "id": "cmpn06qby0001v8iwjiua0d58",
+                        "name": "João Silva",
+                        "email": "joao@exemplo.com",
+                        "phone": "11999998888",
+                        "company": "Empresa XYZ",
+                        "message": "Gostaria de saber mais sobre os serviços oferecidos.",
+                        "createdAt": "2026-05-26T19:03:24.621Z"
+                      },
+                      {
+                        "id": "cmpn056sf0000v8iwtuxmy0b8",
+                        "name": "Test User",
+                        "email": "test@test.com",
+                        "phone": null,
+                        "company": null,
+                        "message": "Hello world message",
+                        "createdAt": "2026-05-26T19:02:12.638Z"
+                      },
+                      {
+                        "id": "cmpmzzmm10000v8vorxtywxhn",
+                        "name": "João Silva",
+                        "email": "joao@exemplo.com",
+                        "phone": "11999998888",
+                        "company": "Empresa XYZ",
+                        "message": "Gostaria de saber mais sobre os serviços oferecidos.",
+                        "createdAt": "2026-05-26T18:57:53.207Z"
+                      }
+                    ],
+                    "meta": {
+                      "total": 4,
+                      "page": 1,
+                      "perPage": 15,
+                      "lastPage": 1
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/contact-submissions/{id}": {
+      "get": {
+        "summary": "Show Contact Submission",
+        "deprecated": false,
+        "description": "Detalhe de uma mensagem.",
+        "operationId": "contactShowSubmission",
+        "tags": [
+          "contact"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "cmpncaf1d0002v8iwqftn31f9",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Contact%20Resource"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "id": "cmpncaf1d0002v8iwqftn31f9",
+                    "name": "João Silva",
+                    "email": "joao@exemplo.com",
+                    "phone": "11999998888",
+                    "company": "Empresa XYZ",
+                    "message": "Gostaria de saber mais sobre os serviços oferecidos.",
+                    "createdAt": "2026-05-27T00:42:11.995Z"
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/blog-posts": {
+      "get": {
+        "summary": "List Blog Posts",
+        "deprecated": false,
+        "description": "Lista posts publicados (paginado). Rascunhos não aparecem.\n",
+        "operationId": "blogListPosts",
+        "tags": [
+          "blog"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Blog%20Post%20Resource"
+                          }
+                        },
+                        "meta": {
+                          "$ref": "#/components/schemas/Pagination%20Resource"
+                        }
+                      },
+                      "required": [
+                        "data",
+                        "meta"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "data": [
+                      {
+                        "id": "cmpnce4x00004v8iwtlf26ww3",
+                        "title": "Meu primeiro post",
+                        "slug": "meu-primeiro-post",
+                        "excerpt": "Resumo do artigo.",
+                        "coverImage": "https://exemplo.com/capa.jpg",
+                        "status": "PUBLISHED",
+                        "publishedAt": "2026-05-27T00:47:00.448Z",
+                        "createdAt": "2026-05-27T00:45:05.506Z",
+                        "updatedAt": "2026-05-27T00:47:00.457Z"
+                      }
+                    ],
+                    "meta": {
+                      "total": 1,
+                      "page": 1,
+                      "perPage": 2,
+                      "lastPage": 1
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/blog-posts/{slug}": {
+      "get": {
+        "summary": "Show Blog Post",
+        "deprecated": false,
+        "description": "Detalhe de um post publicado pelo slug.\n",
+        "operationId": "blogShowPost",
+        "tags": [
+          "blog"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "meu-primeiro-post",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Blog%20Post%20Resource"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "id": "cmpnce4x00004v8iwtlf26ww3",
+                    "title": "Meu primeiro post",
+                    "slug": "meu-primeiro-post",
+                    "excerpt": "Resumo do artigo.",
+                    "coverImage": "https://exemplo.com/capa.jpg",
+                    "status": "PUBLISHED",
+                    "publishedAt": "2026-05-27T00:47:00.448Z",
+                    "createdAt": "2026-05-27T00:45:05.506Z",
+                    "updatedAt": "2026-05-27T00:47:00.457Z",
+                    "content": "Conteúdo completo do post.",
+                    "author": {
+                      "id": "cmpmzwgun0000v820oqv930by",
+                      "name": "Administrador",
+                      "email": "lj@drechsler.net.br"
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/admin/blog-posts": {
+      "get": {
+        "summary": "List Posts/Drafts",
+        "deprecated": false,
+        "description": "Lista todos os posts (rascunhos e publicados).\n",
+        "operationId": "blogListPostsDrafts",
+        "tags": [
+          "blog"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": 2,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Blog%20Post%20Resource"
+                          }
+                        },
+                        "meta": {
+                          "$ref": "#/components/schemas/Pagination%20Resource"
+                        }
+                      },
+                      "required": [
+                        "data",
+                        "meta"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "data": [],
+                    "meta": {
+                      "total": 0,
+                      "page": 1,
+                      "perPage": 2,
+                      "lastPage": 1
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create Blog Post",
+        "deprecated": false,
+        "description": "Cria um novo post.\n",
+        "operationId": "blogCreatePost",
+        "tags": [
+          "blog"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "excerpt": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "coverImage": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "DRAFT",
+                      "PUBLISHED"
+                    ]
+                  }
+                },
+                "required": [
+                  "title",
+                  "excerpt",
+                  "content",
+                  "coverImage",
+                  "status"
+                ]
+              },
+              "example": {
+                "title": "Meu primeiro post",
+                "excerpt": "Resumo do artigo.",
+                "content": "Conteúdo completo do post.",
+                "coverImage": "https://exemplo.com/capa.jpg",
+                "status": "DRAFT"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Blog%20Post%20Resource"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "id": "cmpnce4x00004v8iwtlf26ww3",
+                    "title": "Meu primeiro post",
+                    "slug": "meu-primeiro-post",
+                    "excerpt": "Resumo do artigo.",
+                    "coverImage": "https://exemplo.com/capa.jpg",
+                    "status": "DRAFT",
+                    "publishedAt": null,
+                    "createdAt": "2026-05-27T00:45:05.506Z",
+                    "updatedAt": "2026-05-27T00:45:05.506Z",
+                    "content": "Conteúdo completo do post.",
+                    "author": {
+                      "id": "cmpmzwgun0000v820oqv930by",
+                      "name": "Administrador",
+                      "email": "lj@drechsler.net.br"
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/blog-posts/{id}": {
+      "get": {
+        "summary": "Show Blog Post",
+        "deprecated": false,
+        "description": "Detalhe de um post (qualquer status).",
+        "tags": [
+          "blog"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "cmpnce4x00004v8iwtlf26ww3",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Blog%20Post%20Resource"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "id": "cmpnce4x00004v8iwtlf26ww3",
+                    "title": "Meu primeiro post",
+                    "slug": "meu-primeiro-post",
+                    "excerpt": "Resumo do artigo.",
+                    "coverImage": "https://exemplo.com/capa.jpg",
+                    "status": "PUBLISHED",
+                    "publishedAt": "2026-05-27T00:47:00.448Z",
+                    "createdAt": "2026-05-27T00:45:05.506Z",
+                    "updatedAt": "2026-05-27T00:47:00.457Z",
+                    "content": "Conteúdo completo do post.",
+                    "author": {
+                      "id": "cmpmzwgun0000v820oqv930by",
+                      "name": "Administrador",
+                      "email": "lj@drechsler.net.br"
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "Update Blog Post",
+        "deprecated": false,
+        "description": "Atualiza um post (campos parciais permitidos).",
+        "operationId": "blogUpdatePost",
+        "tags": [
+          "blog"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "cmpnce4x00004v8iwtlf26ww3",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "title",
+                  "content"
+                ]
+              },
+              "example": {
+                "title": "Meu primeiro post",
+                "content": "Conteúdo completo do post."
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Blog%20Post%20Resource"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "id": "cmpnce4x00004v8iwtlf26ww3",
+                    "title": "Meu primeiro post",
+                    "slug": "meu-primeiro-post",
+                    "excerpt": "Resumo do artigo.",
+                    "coverImage": "https://exemplo.com/capa.jpg",
+                    "status": "PUBLISHED",
+                    "publishedAt": "2026-05-27T00:47:00.448Z",
+                    "createdAt": "2026-05-27T00:45:05.506Z",
+                    "updatedAt": "2026-05-27T00:51:51.816Z",
+                    "content": "Conteúdo completo do post.",
+                    "author": {
+                      "id": "cmpmzwgun0000v820oqv930by",
+                      "name": "Administrador",
+                      "email": "lj@drechsler.net.br"
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete Blog Post",
+        "deprecated": false,
+        "description": "Remove um post.",
+        "operationId": "blogDeletePost",
+        "tags": [
+          "blog"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "cmpnce4x00004v8iwtlf26ww3",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "null"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": null,
+                  "message": "Post removido com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/admin/blog-posts/{id}/publish": {
+      "patch": {
+        "summary": "Blog Plublish/Unpublish Post",
+        "deprecated": false,
+        "description": "Publica ou despublica um post.",
+        "operationId": "blogPublish",
+        "tags": [
+          "blog"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "example": "cmpnce4x00004v8iwtlf26ww3",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "DRAFT",
+                      "PUBLISHED"
+                    ]
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              },
+              "example": {
+                "status": "PUBLISHED"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Blog%20Post%20Resource"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "id": "cmpnce4x00004v8iwtlf26ww3",
+                    "title": "Meu primeiro post",
+                    "slug": "meu-primeiro-post",
+                    "excerpt": "Resumo do artigo.",
+                    "coverImage": "https://exemplo.com/capa.jpg",
+                    "status": "PUBLISHED",
+                    "publishedAt": "2026-05-27T00:47:00.448Z",
+                    "createdAt": "2026-05-27T00:45:05.506Z",
+                    "updatedAt": "2026-05-27T00:47:00.457Z",
+                    "content": "Conteúdo completo do post.",
+                    "author": {
+                      "id": "cmpmzwgun0000v820oqv930by",
+                      "name": "Administrador",
+                      "email": "lj@drechsler.net.br"
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "deprecated": false,
+        "description": "Login do administrador.\n",
+        "operationId": "authLogin",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {
+                "email": "lj@drechsler.net.br",
+                "password": "senha123$"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string"
+                        },
+                        "user": {
+                          "$ref": "#/components/schemas/User%20Resource"
+                        }
+                      },
+                      "required": [
+                        "accessToken",
+                        "user"
+                      ]
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbXBtendndW4wMDAwdjgyMG9xdjkzMGJ5IiwiZW1haWwiOiJsakBkcmVjaHNsZXIubmV0LmJyIiwiaWF0IjoxNzc5ODIyMTU1LCJleHAiOjE3ODA0MjY5NTV9.WG3JMkDfumEkA0Su4DeqKv_JUAUXXPgozmg86-HZE7E",
+                    "user": {
+                      "id": "cmpmzwgun0000v820oqv930by",
+                      "name": "Administrador",
+                      "email": "lj@drechsler.net.br"
+                    }
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "summary": "Me",
+        "deprecated": false,
+        "description": "Retorna o perfil do usuário autenticado.",
+        "operationId": "authMe",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User%20Resource"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "id": "cmpmzwgun0000v820oqv930by",
+                    "name": "Administrador",
+                    "email": "lj@drechsler.net.br"
+                  },
+                  "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "ContactStoreRequest": {
+      "User Resource": {
         "type": "object",
-        "required": ["name", "email", "message"],
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "name": {
-            "type": "string",
-            "maxLength": 255
+            "type": "string"
           },
           "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "email"
+        ]
+      },
+      "Blog Post Resource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "excerpt": {
+            "type": "string"
+          },
+          "coverImage": {
+            "type": "string"
+          },
+          "status": {
             "type": "string",
-            "format": "email",
-            "maxLength": 255
+            "enum": [
+              "DRAFT",
+              "PUBLISHED"
+            ]
+          },
+          "publishedAt": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/User%20Resource"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "slug",
+          "excerpt",
+          "coverImage",
+          "status",
+          "publishedAt",
+          "createdAt",
+          "updatedAt",
+          "content",
+          "author"
+        ]
+      },
+      "Pagination Resource": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "perPage": {
+            "type": "integer"
+          },
+          "lastPage": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "page",
+          "perPage",
+          "lastPage"
+        ]
+      },
+      "Contact Resource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
           },
           "phone": {
             "type": "string",
-            "maxLength": 30,
             "nullable": true
           },
           "company": {
             "type": "string",
-            "maxLength": 255,
             "nullable": true
           },
           "message": {
-            "type": "string",
-            "maxLength": 5000
-          }
-        }
-      },
-      "ContactStoreResponse": {
-        "type": "object",
-        "properties": {
-          "message": {
+            "type": "string"
+          },
+          "createdAt": {
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "phone",
+          "company",
+          "message",
+          "createdAt"
+        ]
+      }
+    },
+    "responses": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
-  }
+  },
+  "servers": [],
+  "security": []
 }
