@@ -16,6 +16,21 @@ import { cn } from "@/lib/utils";
 const CONTACT_STORAGE_KEY = "admin-contact:list-per-page";
 const BLOG_STORAGE_KEY = "admin-blog:list-per-page";
 
+const DASHBOARD_SECTION_NAV = [
+  {
+    label: "Postagens do blog",
+    shortLabel: "Blog",
+    targetId: "admin-blog-posts",
+    icon: Newspaper,
+  },
+  {
+    label: "Formulários preenchidos",
+    shortLabel: "Formulários",
+    targetId: "admin-contact-submissions",
+    icon: File,
+  },
+];
+
 function formatDate(value: string): string {
   return new Date(value).toLocaleDateString("pt-BR", {
     day: "2-digit",
@@ -182,8 +197,9 @@ export function AdminDashboardPage() {
 
   return (
     <AdminShell
-      title={meData?.data.name ? `Olá, ${meData.data.name}` : "Painel administrativo"}
+      userName={meData?.data.name}
       onLogout={handleLogout}
+      sectionNav={DASHBOARD_SECTION_NAV}
     >
       <div className="site-container flex w-full flex-1 flex-col gap-8 py-6 md:py-8 md:pb-10">
         <header>
@@ -194,11 +210,17 @@ export function AdminDashboardPage() {
         </header>
 
         <div className="flex flex-col gap-8">
-          <section className="flex min-h-[28rem] flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+          <section
+            id="admin-blog-posts"
+            className="flex min-h-[28rem] scroll-mt-28 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm"
+          >
             <BlogPostsSection />
           </section>
 
-          <section className="flex min-h-[28rem] flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+          <section
+            id="admin-contact-submissions"
+            className="flex min-h-[28rem] scroll-mt-28 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm"
+          >
             <ContactSubmissionsSection />
           </section>
         </div>

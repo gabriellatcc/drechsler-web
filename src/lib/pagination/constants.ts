@@ -1,6 +1,6 @@
-export const DEFAULT_PER_PAGE = 10;
+export const DEFAULT_PER_PAGE = 5;
 
-export const PER_PAGE_OPTIONS = [10, 25, 50] as const;
+export const PER_PAGE_OPTIONS = [5, 10, 15, 20, 25] as const;
 
 export type PerPageOption = (typeof PER_PAGE_OPTIONS)[number];
 
