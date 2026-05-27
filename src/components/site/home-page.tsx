@@ -8,8 +8,13 @@ import {
   ABOUT,
   getHomeFeaturedServices,
   MISSION_VISION_VALUES,
+  SERVICE_CATEGORIES,
   whatsappUrl,
 } from "@/lib/site-content";
+import {
+  HOME_SERVICE_CATEGORY_SHORTCUTS,
+  SERVICE_CATEGORY_ICONS,
+} from "@/lib/service-icons";
 import { SITE_IMAGES } from "@/lib/site-images";
 
 export function HomePage() {
@@ -19,12 +24,40 @@ export function HomePage() {
     <>
       <section className="section-padding border-y border-border bg-muted/20">
         <div className="site-container space-y-4">
-          <div className="space-y-2 border-l-4 border-primary pl-4">
-            <h2 className="heading-tight text-2xl md:text-3xl">Serviços</h2>
-            <p className="text-sm text-muted-foreground">
-              Amplo portfólio de soluções tecnológicas, analíticas, regulatórias e de
-              treinamento para os setores químico e farmacêutico.
-            </p>
+          <div className="border-l-4 border-primary pl-4">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-xl space-y-2">
+                <h2 className="heading-tight text-2xl md:text-3xl">Serviços</h2>
+                <p className="text-sm text-muted-foreground">
+                  Amplo portfólio de soluções tecnológicas, analíticas, regulatórias e de
+                  treinamento para os setores químico e farmacêutico.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap justify-start gap-3 sm:justify-end md:gap-4 lg:shrink-0">
+                {HOME_SERVICE_CATEGORY_SHORTCUTS.map((category) => {
+                  const Icon = SERVICE_CATEGORY_ICONS[category];
+                  const label = SERVICE_CATEGORIES[category];
+
+                  return (
+                    <Link
+                      key={category}
+                      to="/servicos"
+                      search={{ categoria: category }}
+                      className="group flex w-20 flex-col items-center gap-2 text-center sm:w-24"
+                      aria-label={label}
+                    >
+                      <span className="inline-flex size-11 items-center justify-center rounded-full bg-primary text-background transition-opacity group-hover:opacity-90">
+                        <Icon className="size-5" />
+                      </span>
+                      <span className="line-clamp-3 text-xs font-medium leading-snug text-muted-foreground transition-colors group-hover:text-foreground">
+                        {label}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
