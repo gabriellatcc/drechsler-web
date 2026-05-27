@@ -8,7 +8,7 @@ export const SITE = {
 export const CONTACT = {
   emails: ["contato@drechsler.net.br"],
   whatsapp: "12991076376",
-  linkedin: "https://www.linkedin.com/company/drechsler-inovacao-tecnologia-quimica",
+  linkedin: "https://www.linkedin.com/company/drechsler-inova%C3%A7%C3%A3o-tecnologia-qu%C3%ADmica/",
 } as const;
 
 export function whatsappUrl(message?: string): string {
