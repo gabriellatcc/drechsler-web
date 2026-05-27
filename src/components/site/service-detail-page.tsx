@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 
+import { NotFoundPage } from "@/components/site/not-found-page";
 import { PageHeroBand } from "@/components/layout/page-hero-band";
 import { SiteIllustration } from "@/components/site/site-illustration";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getServiceBySlug, whatsappUrl, type Service } from "@/lib/site-content";
+import { getServiceBySlug, SITE, whatsappUrl, type Service } from "@/lib/site-content";
 import { getServiceImage } from "@/lib/site-images";
 import { cn } from "@/lib/utils";
 
@@ -87,16 +88,10 @@ export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
 
 export function ServiceNotFoundPage() {
   return (
-    <>
-      <PageHeroBand />
-      <section className="section-padding">
-        <div className="site-container max-w-xl border border-border p-6 text-center">
-          <Button asChild>
-            <Link to="/servicos">Ver todos os serviços</Link>
-          </Button>
-        </div>
-      </section>
-    </>
+    <NotFoundPage
+      documentTitle={`Serviço não encontrado — ${SITE.shortName}`}
+      secondaryAction={{ to: "/servicos", label: "Ver todos os serviços" }}
+    />
   );
 }
 

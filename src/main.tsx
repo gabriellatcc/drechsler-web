@@ -5,6 +5,7 @@ import { createRoot } from "react-dom/client";
 import { Analytics } from "@vercel/analytics/react";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { RootNotFoundPage } from "@/components/site/not-found-page";
 import { routeTree } from "@/routeTree.gen";
 
 import "./global.css";
@@ -23,6 +24,8 @@ const router = createRouter({
   },
   defaultPreload: "intent",
   scrollRestoration: true,
+  notFoundMode: "root",
+  defaultNotFoundComponent: RootNotFoundPage,
 });
 
 declare module "@tanstack/react-router" {

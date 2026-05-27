@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 
 import { AdminDashboardPage } from "@/components/admin/admin-dashboard-page";
 import { getAuthAccessToken } from "@/lib/api-client";
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/admin/dashboard")({
   beforeLoad: () => {
     if (typeof window === "undefined") return;
     if (!getAuthAccessToken()) {
-      throw redirect({ to: "/admin" });
+      throw notFound();
     }
   },
   component: AdminDashboardPage,

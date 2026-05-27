@@ -6,7 +6,8 @@ export type PageSegmentKey =
   | "servicos"
   | "contato"
   | "service-detail"
-  | "service-not-found";
+  | "service-not-found"
+  | "not-found";
 
 export type PageContentEntry = {
   label?: string;
@@ -43,6 +44,12 @@ export const PAGE_CONTENT: Record<
   "service-not-found": {
     title: "Serviço não encontrado",
     description: "O serviço solicitado não existe ou foi removido.",
+  },
+  "not-found": {
+    label: "404",
+    title: "Página não encontrada",
+    description:
+      "O endereço que você acessou não existe ou não está mais disponível. Verifique o link ou volte ao início.",
   },
 };
 
@@ -118,8 +125,8 @@ export function resolvePageSegment(pathname: string, slug?: string): ResolvedPag
   }
 
   return {
-    segment: "home",
-    animationKey: "home",
-    ...PAGE_CONTENT.home,
+    segment: "not-found",
+    animationKey: "not-found",
+    ...PAGE_CONTENT["not-found"],
   };
 }

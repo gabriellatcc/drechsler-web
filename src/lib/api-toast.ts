@@ -31,8 +31,7 @@ export function getApiErrorMessage(error: unknown, fallback = "Ocorreu um erro i
     }
 
     if (status === 401) return "Sessão expirada. Faça login novamente.";
-    if (status === 403) return "Você não tem permissão para esta ação.";
-    if (status === 404) return "Recurso não encontrado.";
+    if (status === 403 || status === 404) return "Recurso não encontrado.";
     if (status === 422) return "Verifique os dados enviados.";
     if (status === 500) return "Erro interno do servidor. Tente novamente mais tarde.";
 
