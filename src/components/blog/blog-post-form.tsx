@@ -45,7 +45,7 @@ import {
   blogPostFormSchema,
   type BlogPostFormValues,
 } from "./blog-post-schema";
-import { BlogCoverImagePreview } from "./blog-cover-image-preview";
+import { BlogCoverImage } from "./blog-cover-image";
 
 type BlogPostFormDialogProps = {
   open: boolean;
@@ -231,9 +231,11 @@ export function BlogPostFormDialog({
                   </p>
                   <FormMessage />
                   {coverImageValue.trim() ? (
-                    <BlogCoverImagePreview
+                    <BlogCoverImage
                       src={coverImageValue}
                       alt="Pré-visualização da capa"
+                      label="Pré-visualização da capa"
+                      showErrorMessage
                     />
                   ) : null}
                 </FormItem>

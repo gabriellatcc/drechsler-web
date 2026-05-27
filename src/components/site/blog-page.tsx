@@ -22,20 +22,18 @@ function BlogPostListItem({ post }: { post: BlogPostSummary }) {
   return (
     <article className="blog-publication-item group">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
-        {post.coverImage ? (
-          <Link
-            to="/blog/$slug"
-            params={{ slug: post.slug }}
-            className="blog-publication-cover shrink-0 overflow-hidden rounded-sm border border-border bg-muted/30 lg:w-44"
-          >
-            <BlogCoverImage
-              src={post.coverImage}
-              alt={`Capa de ${post.title}`}
-              className="aspect-[4/3] w-full transition-transform duration-300 group-hover:scale-[1.02]"
-              imageClassName="size-full object-cover"
-            />
-          </Link>
-        ) : null}
+        <Link
+          to="/blog/$slug"
+          params={{ slug: post.slug }}
+          className="blog-publication-cover block shrink-0 lg:w-44"
+        >
+          <BlogCoverImage
+            src={post.coverImage}
+            alt={`Capa de ${post.title}`}
+            aspect="4/3"
+            imageClassName="transition-transform duration-300 group-hover:scale-[1.02]"
+          />
+        </Link>
 
         <div className="min-w-0 flex-1 space-y-3">
           <div className="space-y-2">

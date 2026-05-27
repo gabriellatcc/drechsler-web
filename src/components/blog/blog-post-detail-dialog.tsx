@@ -85,16 +85,11 @@ export function BlogPostDetailDialog({ open, onOpenChange, postId }: BlogPostDet
             </DialogHeader>
 
             <div className="space-y-5">
-              {post.coverImage ? (
-                <div className="overflow-hidden rounded-md border border-border bg-muted/30">
-                  <BlogCoverImage
-                    src={post.coverImage}
-                    alt={`Capa de ${post.title}`}
-                    className="aspect-video w-full"
-                    imageClassName="size-full object-cover"
-                  />
-                </div>
-              ) : null}
+              <BlogCoverImage
+                src={post.coverImage}
+                alt={`Capa de ${post.title}`}
+                aspect="video"
+              />
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <DetailField label="Autor">

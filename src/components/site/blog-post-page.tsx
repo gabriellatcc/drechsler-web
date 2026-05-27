@@ -63,16 +63,11 @@ export function BlogPostPage({ slug }: BlogPostPageProps) {
             </h1>
           </header>
 
-          {post.coverImage ? (
-            <figure className="overflow-hidden rounded-sm border border-border bg-muted/30">
-              <BlogCoverImage
-                src={post.coverImage}
-                alt={`Ilustração de capa para ${post.title}`}
-                className="aspect-video w-full"
-                imageClassName="size-full object-cover"
-              />
-            </figure>
-          ) : null}
+          <BlogCoverImage
+            src={post.coverImage}
+            alt={`Ilustração de capa para ${post.title}`}
+            aspect="video"
+          />
 
           {post.excerpt ? (
             <section aria-labelledby="blog-post-abstract" className="space-y-2">
