@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { HomeHeroActions } from "@/components/layout/home-hero-actions";
+import { HomeHeroCarousel } from "@/components/layout/home-hero-carousel";
 import { PageAreaHeader } from "@/components/layout/page-area-header";
 import { SiteIllustration } from "@/components/site/site-illustration";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -40,33 +41,28 @@ function NavPageHero() {
   const isServicos = content.segment === "servicos";
   const aside = getSharedHeroAside(content.segment);
 
+  if (isHero) {
+    return (
+      <HomeHeroCarousel>
+        <div className="space-y-4 text-center">
+          <PageAreaHeader variant="hero" />
+          <HomeHeroActions />
+        </div>
+      </HomeHeroCarousel>
+    );
+  }
+
   return (
     <section
       className={cn(
-        isHero
-          ? "hero-overlay relative flex min-h-[calc(50vh-1.75rem)] items-center justify-center bg-cover bg-center sm:min-h-[calc((100vh-3.5rem)/2)]"
-          : cn(
-              "bg-muted/20",
-              isServicos ? "pt-9 md:pt-10" : "section-padding",
-            ),
+        "bg-muted/20",
+        isServicos ? "pt-9 md:pt-10" : "section-padding",
       )}
-      style={isHero ? { backgroundImage: `url(${SITE_IMAGES.fundoLandingPage})` } : undefined}
     >
-      <div
-        className={cn(
-          "site-container relative z-10 w-full",
-          isHero ? "py-6 md:py-8" : undefined,
-        )}
-      >
-        <div
-          className={cn(
-            "grid items-center gap-8",
-            isHero ? "mx-auto max-w-3xl" : "lg:grid-cols-[1fr_1.1fr]",
-          )}
-        >
-          <div className={cn("space-y-4", isHero && "text-center")}>
-            <PageAreaHeader variant={isHero ? "hero" : "default"} />
-            {isHero ? <HomeHeroActions /> : null}
+      <div className="site-container relative z-10 w-full">
+        <div className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr]">
+          <div className="space-y-4">
+            <PageAreaHeader variant="default" />
           </div>
           {aside}
         </div>

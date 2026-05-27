@@ -5,7 +5,9 @@ import bequerLiquidoVerde from "@/assets/bequer-liquido-verde.png";
 import bequersComContagotas from "@/assets/bequers-com-contagotas.png";
 import cano from "@/assets/cano.png";
 import cristaisAzuis from "@/assets/cristais-azuis.png";
-import fundoLandingPage from "@/assets/fundo-landing-page-1.png";
+import fundoLandingPage1 from "@/assets/fundo-landing-page-1.png";
+import fundoLandingPage2 from "@/assets/fundo-landing-page-2.png";
+import fundoLandingPage3 from "@/assets/fundo-landing-page-3.png";
 import homemAnotacoes from "@/assets/homem-anotacoes.png";
 import ligacoesQuimicas2 from "@/assets/ligacoes-quimicas-2.png";
 import liquidoDistribuido from "@/assets/liquido-distribuido.png";
@@ -17,12 +19,18 @@ import segurandoTubo from "@/assets/segurando-tubo.png";
 
 import type { Service } from "@/lib/site-content";
 
+export const HOME_HERO_SLIDES = [
+  fundoLandingPage1,
+  fundoLandingPage2,
+  fundoLandingPage3,
+] as const;
+
 export const SITE_IMAGES = {
   logoColor: logoColorida,
   logoDark: logoModoEscuro,
   homemAnotacoes,
   povPesquisador,
-  fundoLandingPage,
+  fundoLandingPage: fundoLandingPage1,
 } as const;
 
 export const SERVICE_IMAGES: Record<Service["slug"], string> = {
