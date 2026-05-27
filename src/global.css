@@ -184,7 +184,7 @@
 
 .hero-gradient {
   @apply border-b relative;
-  background-image: url('/assets/fundo-landing-page.png');
+  background-image: url('/assets/fundo-landing-page-1.png');
   background-size: cover;
   background-position: center;
 }

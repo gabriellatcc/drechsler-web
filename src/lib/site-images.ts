@@ -5,7 +5,7 @@ import bequerLiquidoVerde from "@/assets/bequer-liquido-verde.png";
 import bequersComContagotas from "@/assets/bequers-com-contagotas.png";
 import cano from "@/assets/cano.png";
 import cristaisAzuis from "@/assets/cristais-azuis.png";
-import fundoLandingPage from "@/assets/fundo-landing-page.png";
+import fundoLandingPage from "@/assets/fundo-landing-page-1.png";
 import homemAnotacoes from "@/assets/homem-anotacoes.png";
 import ligacoesQuimicas2 from "@/assets/ligacoes-quimicas-2.png";
 import liquidoDistribuido from "@/assets/liquido-distribuido.png";
