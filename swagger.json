@@ -22,7 +22,7 @@
         "summary": "Create Contact",
         "deprecated": false,
         "description": "Envia uma mensagem pelo formulário de contato.",
-        "operationId": "contactMe",
+        "operationId": "contactCreate",
         "tags": [
           "contact"
         ],
@@ -801,7 +801,7 @@
             "in": "path",
             "description": "",
             "required": true,
-            "example": "cmpnce4x00004v8iwtlf26ww3",
+            "example": "cmpnckte10006v8iwnm7gy7a6",
             "schema": {
               "type": "string"
             }
@@ -823,21 +823,91 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "title": {
-                    "type": "string"
+                  "success": {
+                    "type": "boolean"
                   },
-                  "content": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "slug": {
+                        "type": "string"
+                      },
+                      "excerpt": {
+                        "type": "string"
+                      },
+                      "coverImage": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "publishedAt": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "author": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "email"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "title",
+                      "slug",
+                      "excerpt",
+                      "coverImage",
+                      "status",
+                      "publishedAt",
+                      "createdAt",
+                      "updatedAt",
+                      "content",
+                      "author"
+                    ]
+                  },
+                  "message": {
                     "type": "string"
                   }
                 },
                 "required": [
-                  "title",
-                  "content"
+                  "success",
+                  "data",
+                  "message"
                 ]
               },
               "example": {
-                "title": "Meu primeiro post",
-                "content": "Conteúdo completo do post."
+                "title": "Meu segundo post",
+                "excerpt": "Resumo do artigo teste.",
+                "content": "Conteúdo completo do post teste.",
+                "coverImage": "https://exemplo.com/capa.jpg"
               }
             }
           },
@@ -1207,6 +1277,68 @@
                     "email": "lj@drechsler.net.br"
                   },
                   "message": "Operação realizada com sucesso"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/logout": {
+      "delete": {
+        "summary": "Refresh Token",
+        "deprecated": false,
+        "description": "Renova o Token.\n",
+        "operationId": "authRefreshToken",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "example": "application/json",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "null"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "data",
+                    "message"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": null,
+                  "message": "Sessão encerrada com sucesso."
                 }
               }
             },

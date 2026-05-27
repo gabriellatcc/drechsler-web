@@ -46,27 +46,20 @@ export function BlogPostPage({ slug }: BlogPostPageProps) {
       <article className="section-padding">
         <div className="site-container mx-auto max-w-3xl space-y-8">
           <header className="space-y-4 border-b border-border pb-6">
-            <p className="label-technical text-primary">Publicação científica</p>
-            <h1 className="font-serif text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-4xl">
-              {post.title}
-            </h1>
-
-            <dl className="grid gap-3 text-sm sm:grid-cols-2">
+            <div className="flex flex-row justify-between items-center">
+              <p className="label-technical text-primary">
+                Publicação da equipe DRECHSLER
+              </p>
               <div className="space-y-1">
-                <dt className="label-technical text-muted-foreground">Autor</dt>
-                <dd className="inline-flex items-center gap-1.5 text-foreground">
-                  <User className="size-3.5 text-muted-foreground" />
-                  {post.author?.name ?? "Equipe DRECHSLER"}
-                </dd>
-              </div>
-              <div className="space-y-1">
-                <dt className="label-technical text-muted-foreground">Data de publicação</dt>
                 <dd className="inline-flex items-center gap-1.5 text-foreground">
                   <Calendar className="size-3.5 text-muted-foreground" />
                   {formatBlogDate(post.publishedAt)}
                 </dd>
               </div>
-            </dl>
+            </div>
+            <h1 className="font-serif text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-4xl">
+              {post.title}
+            </h1>
           </header>
 
           {post.coverImage ? (
@@ -91,9 +84,6 @@ export function BlogPostPage({ slug }: BlogPostPageProps) {
           ) : null}
 
           <section aria-labelledby="blog-post-content" className="space-y-3">
-            <h2 id="blog-post-content" className="label-technical text-foreground">
-              Conteúdo
-            </h2>
             <div className="blog-article-body whitespace-pre-wrap text-sm leading-relaxed text-foreground md:text-base">
               {post.content}
             </div>

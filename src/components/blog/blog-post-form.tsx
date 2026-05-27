@@ -66,9 +66,9 @@ function toFormValues(
 
   return {
     title: post.title,
-    excerpt: post.excerpt,
+    excerpt: post.excerpt ?? "",
     content: post.content,
-    coverImage: post.coverImage,
+    coverImage: post.coverImage ?? "",
     status:
       post.status === BlogCreatePostBodyStatus.PUBLISHED
         ? BlogCreatePostBodyStatus.PUBLISHED
@@ -132,7 +132,9 @@ export function BlogPostFormDialog({
         id: post.id,
         data: {
           title: values.title,
+          excerpt: values.excerpt,
           content: values.content,
+          coverImage: values.coverImage,
         },
       });
       return;
@@ -156,7 +158,7 @@ export function BlogPostFormDialog({
           <DialogTitle>{isEdit ? "Editar postagem" : "Nova postagem"}</DialogTitle>
           <DialogDescription>
             {isEdit
-              ? "Altere título e conteúdo. Outros campos são exibidos apenas para referência."
+              ? "Altere título, resumo, conteúdo e imagem de capa da postagem."
               : "Preencha os dados para criar uma nova postagem no blog."}
           </DialogDescription>
         </DialogHeader>
@@ -187,7 +189,6 @@ export function BlogPostFormDialog({
                     <Textarea
                       placeholder="Breve resumo exibido na listagem"
                       rows={2}
-                      disabled={isEdit}
                       {...field}
                     />
                   </FormControl>
@@ -218,8 +219,7 @@ export function BlogPostFormDialog({
                   <FormLabel>Imagem de capa (URL)</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="https://exemplo.com "
-                      disabled={isEdit}
+                      placeholder="https://exemplo.com/capa.jpg"
                       {...field}
                     />
                   </FormControl>

@@ -24,10 +24,10 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ContactCreate200,
+  ContactCreateBody,
   ContactListSubmissions200,
   ContactListSubmissionsParams,
-  ContactMe200,
-  ContactMeBody,
   ContactShowSubmission200
 } from '../models';
 
@@ -42,27 +42,27 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * Envia uma mensagem pelo formulário de contato.
  * @summary Create Contact
  */
-export const contactMe = (
-    contactMeBody: ContactMeBody,
+export const contactCreate = (
+    contactCreateBody: ContactCreateBody,
  options?: SecondParameter<typeof apiClient>,signal?: AbortSignal
 ) => {
 
 
-      return apiClient<ContactMe200>(
+      return apiClient<ContactCreate200>(
       {url: `/contact`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: contactMeBody, signal
+      data: contactCreateBody, signal
     },
       options);
     }
 
 
 
-export const getContactMeMutationOptions = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof contactMe>>, TError,{data: ContactMeBody}, TContext>, request?: SecondParameter<typeof apiClient>}
-): UseMutationOptions<Awaited<ReturnType<typeof contactMe>>, TError,{data: ContactMeBody}, TContext> => {
+export const getContactCreateMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof contactCreate>>, TError,{data: ContactCreateBody}, TContext>, request?: SecondParameter<typeof apiClient>}
+): UseMutationOptions<Awaited<ReturnType<typeof contactCreate>>, TError,{data: ContactCreateBody}, TContext> => {
 
-const mutationKey = ['contactMe'];
+const mutationKey = ['contactCreate'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -72,10 +72,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof contactMe>>, {data: ContactMeBody}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof contactCreate>>, {data: ContactCreateBody}> = (props) => {
           const {data} = props ?? {};
 
-          return  contactMe(data,requestOptions)
+          return  contactCreate(data,requestOptions)
         }
 
 
@@ -85,22 +85,22 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
   return  { mutationFn, ...mutationOptions }}
 
-    export type ContactMeMutationResult = NonNullable<Awaited<ReturnType<typeof contactMe>>>
-    export type ContactMeMutationBody = ContactMeBody
-    export type ContactMeMutationError = unknown
+    export type ContactCreateMutationResult = NonNullable<Awaited<ReturnType<typeof contactCreate>>>
+    export type ContactCreateMutationBody = ContactCreateBody
+    export type ContactCreateMutationError = unknown
 
     /**
  * @summary Create Contact
  */
-export const useContactMe = <TError = unknown,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof contactMe>>, TError,{data: ContactMeBody}, TContext>, request?: SecondParameter<typeof apiClient>}
+export const useContactCreate = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof contactCreate>>, TError,{data: ContactCreateBody}, TContext>, request?: SecondParameter<typeof apiClient>}
  , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof contactMe>>,
+        Awaited<ReturnType<typeof contactCreate>>,
         TError,
-        {data: ContactMeBody},
+        {data: ContactCreateBody},
         TContext
       > => {
-      return useMutation(getContactMeMutationOptions(options), queryClient);
+      return useMutation(getContactCreateMutationOptions(options), queryClient);
     }
     /**
  * Lista mensagens de contato (paginado).

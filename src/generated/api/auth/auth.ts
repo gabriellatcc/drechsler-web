@@ -26,7 +26,8 @@ import type {
 import type {
   AuthLogin200,
   AuthLoginBody,
-  AuthMe200
+  AuthMe200,
+  AuthRefreshToken200
 } from '../models';
 
 import { apiClient } from '../../../lib/api-client';
@@ -194,3 +195,66 @@ export function useAuthMe<TData = Awaited<ReturnType<typeof authMe>>, TError = u
 
 
 
+/**
+ * Renova o Token.
+ *
+ * @summary Refresh Token
+ */
+export const authRefreshToken = (
+
+ options?: SecondParameter<typeof apiClient>,signal?: AbortSignal
+) => {
+
+
+      return apiClient<AuthRefreshToken200>(
+      {url: `/auth/logout`, method: 'DELETE', signal
+    },
+      options);
+    }
+
+
+
+export const getAuthRefreshTokenMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext>, request?: SecondParameter<typeof apiClient>}
+): UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext> => {
+
+const mutationKey = ['authRefreshToken'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof authRefreshToken>>, void> = () => {
+
+
+          return  authRefreshToken(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type AuthRefreshTokenMutationResult = NonNullable<Awaited<ReturnType<typeof authRefreshToken>>>
+
+    export type AuthRefreshTokenMutationError = unknown
+
+    /**
+ * @summary Refresh Token
+ */
+export const useAuthRefreshToken = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof authRefreshToken>>, TError,void, TContext>, request?: SecondParameter<typeof apiClient>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof authRefreshToken>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getAuthRefreshTokenMutationOptions(options), queryClient);
+    }

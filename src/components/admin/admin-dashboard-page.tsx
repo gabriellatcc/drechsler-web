@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { File, Loader2, MoreHorizontal, Newspaper, Pencil, Plus, Send, Trash2, Undo2 } from "lucide-react";
+import { Loader2, MoreHorizontal, Newspaper, Pencil, Plus, Send, Trash2, Undo2 } from "lucide-react";
 import { useState, type KeyboardEvent, type SyntheticEvent } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -27,13 +27,10 @@ import {
 import type { BlogPostResource } from "@/generated/api/models/blogPostResource";
 import { BlogPostResourceStatus } from "@/generated/api/models/blogPostResourceStatus";
 import { BlogPublishBodyStatus } from "@/generated/api/models/blogPublishBodyStatus";
-import type { ContactResource } from "@/generated/api/models/contactResource";
-import { useContactListSubmissions } from "@/generated/api/contact/contact";
 import { usePaginatedLastPageGuard, usePaginatedList } from "@/hooks/use-paginated-list";
 import { toastApiError, toastApiSuccess } from "@/lib/api-toast";
 import { cn } from "@/lib/utils";
 
-const CONTACT_STORAGE_KEY = "admin-contact:list-per-page";
 const BLOG_STORAGE_KEY = "admin-blog:list-per-page";
 
 const DASHBOARD_SECTION_NAV = [
@@ -42,12 +39,6 @@ const DASHBOARD_SECTION_NAV = [
     shortLabel: "Blog",
     targetId: "admin-blog-posts",
     icon: Newspaper,
-  },
-  {
-    label: "Formulários preenchidos",
-    shortLabel: "Formulários",
-    targetId: "admin-contact-submissions",
-    icon: File,
   },
 ];
 
@@ -59,25 +50,6 @@ function formatDate(value: string): string {
     hour: "2-digit",
     minute: "2-digit",
   });
-}
-
-function ContactSubmissionItem({ submission }: { submission: ContactResource }) {
-  return (
-    <article className="space-y-1 rounded-sm border border-border bg-card p-3">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <p className="font-medium text-card-foreground">{submission.name}</p>
-        <time className="text-xs text-muted-foreground">{formatDate(submission.createdAt)}</time>
-      </div>
-      <p className="text-sm text-muted-foreground">{submission.email}</p>
-      {submission.phone ? (
-        <p className="text-sm text-muted-foreground">{submission.phone}</p>
-      ) : null}
-      {submission.company ? (
-        <p className="text-sm text-muted-foreground">{submission.company}</p>
-      ) : null}
-      <p className="text-sm leading-relaxed text-foreground">{submission.message}</p>
-    </article>
-  );
 }
 
 type BlogPostListItem = Pick<
@@ -207,49 +179,6 @@ function BlogPostItem({
         </div>
       </div>
     </article>
-  );
-}
-
-function ContactSubmissionsSection() {
-  const search = Route.useSearch();
-  const pagination = usePaginatedList({
-    storageKey: CONTACT_STORAGE_KEY,
-    pageKey: "contact_page",
-    perPageKey: "contact_per_page",
-    search,
-  });
-
-  const {
-    data,
-    isLoading,
-    isFetching,
-    isError,
-  } = useContactListSubmissions(pagination.apiParams);
-
-  const items = data?.data.data ?? [];
-  const meta = data?.data.meta;
-
-  usePaginatedLastPageGuard(pagination.page, meta?.lastPage, pagination.setPage);
-
-  return (
-    <PaginatedListPanel
-      title="Formulários preenchidos"
-      icon={File}
-      items={items}
-      getItemKey={(submission) => submission.id}
-      renderItem={(submission) => <ContactSubmissionItem submission={submission} />}
-      isLoading={isLoading}
-      isFetching={isFetching}
-      isError={isError}
-      emptyMessage="Nenhum formulário recebido ainda."
-      errorMessage="Não foi possível carregar os formulários."
-      itemLabel="formulários"
-      meta={meta}
-      perPage={pagination.perPage}
-      perPageOptions={pagination.perPageOptions}
-      onPageChange={pagination.setPage}
-      onPerPageChange={pagination.setPerPage}
-    />
   );
 }
 
@@ -412,25 +341,16 @@ export function AdminDashboardPage() {
         <header>
           <h1 className="font-serif text-2xl font-semibold tracking-tight">Dashboard</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Formulários recebidos e postagens do blog em um só lugar.
+            Gerencie as postagens do blog publicadas no site.
           </p>
         </header>
 
-        <div className="flex flex-col gap-8">
-          <section
-            id="admin-blog-posts"
-            className="flex min-h-[28rem] scroll-mt-28 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm"
-          >
-            <BlogPostsSection />
-          </section>
-
-          <section
-            id="admin-contact-submissions"
-            className="flex min-h-[28rem] scroll-mt-28 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm"
-          >
-            <ContactSubmissionsSection />
-          </section>
-        </div>
+        <section
+          id="admin-blog-posts"
+          className="flex min-h-[28rem] scroll-mt-28 flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm"
+        >
+          <BlogPostsSection />
+        </section>
       </div>
     </AdminShell>
   );
