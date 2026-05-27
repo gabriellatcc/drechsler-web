@@ -823,85 +823,29 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "success": {
-                    "type": "boolean"
-                  },
-                  "data": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "title": {
-                        "type": "string"
-                      },
-                      "slug": {
-                        "type": "string"
-                      },
-                      "excerpt": {
-                        "type": "string"
-                      },
-                      "coverImage": {
-                        "type": "string"
-                      },
-                      "status": {
-                        "type": "string"
-                      },
-                      "publishedAt": {
-                        "type": "string"
-                      },
-                      "createdAt": {
-                        "type": "string"
-                      },
-                      "updatedAt": {
-                        "type": "string"
-                      },
-                      "content": {
-                        "type": "string"
-                      },
-                      "author": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string"
-                          },
-                          "name": {
-                            "type": "string"
-                          },
-                          "email": {
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "name",
-                          "email"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "id",
-                      "title",
-                      "slug",
-                      "excerpt",
-                      "coverImage",
-                      "status",
-                      "publishedAt",
-                      "createdAt",
-                      "updatedAt",
-                      "content",
-                      "author"
-                    ]
-                  },
-                  "message": {
+                  "title": {
                     "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "excerpt": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "coverImage": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "DRAFT",
+                      "PUBLISHED"
+                    ]
                   }
-                },
-                "required": [
-                  "success",
-                  "data",
-                  "message"
-                ]
+                }
               },
               "example": {
                 "title": "Meu segundo post",

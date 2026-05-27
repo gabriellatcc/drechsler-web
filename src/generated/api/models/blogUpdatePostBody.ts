@@ -4,10 +4,13 @@
  * Default module
  * OpenAPI spec version: 1.0.0
  */
-import type { BlogUpdatePostBodyData } from './blogUpdatePostBodyData';
+import type { BlogUpdatePostBodyStatus } from './blogUpdatePostBodyStatus';
 
 export type BlogUpdatePostBody = {
-  success: boolean;
-  data: BlogUpdatePostBodyData;
-  message: string;
+  title?: string;
+  slug?: string;
+  excerpt?: string;
+  content?: string;
+  coverImage?: string;
+  status?: BlogUpdatePostBodyStatus;
 };
