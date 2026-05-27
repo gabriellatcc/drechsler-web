@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Calendar, Loader2 } from "lucide-react";
 
+import { BlogCoverImage } from "@/components/blog/blog-cover-image";
 import { NotFoundPage } from "@/components/site/not-found-page";
 import { PageHeroBand } from "@/components/layout/page-hero-band";
 import { useBlogShowPost } from "@/generated/api/blog/blog";
@@ -37,7 +38,7 @@ export function BlogPostPage({ slug }: BlogPostPageProps) {
           <Button asChild variant="ghost" className="h-auto p-0">
             <Link to="/blog">
               <ArrowLeft className="size-4" />
-              Voltar às publicações
+              Voltar ao blog
             </Link>
           </Button>
         }
@@ -64,10 +65,11 @@ export function BlogPostPage({ slug }: BlogPostPageProps) {
 
           {post.coverImage ? (
             <figure className="overflow-hidden rounded-sm border border-border bg-muted/30">
-              <img
+              <BlogCoverImage
                 src={post.coverImage}
                 alt={`Ilustração de capa para ${post.title}`}
-                className="aspect-video w-full object-cover"
+                className="aspect-video w-full"
+                imageClassName="size-full object-cover"
               />
             </figure>
           ) : null}

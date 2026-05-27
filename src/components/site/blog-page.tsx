@@ -3,6 +3,7 @@ import { getRouteApi } from "@tanstack/react-router";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight, File, Loader2 } from "lucide-react";
 import { useCallback, useEffect } from "react";
 
+import { BlogCoverImage } from "@/components/blog/blog-cover-image";
 import { Button } from "@/components/ui/button";
 import { useBlogListPosts } from "@/generated/api/blog/blog";
 import type { BlogPostResource } from "@/generated/api/models/blogPostResource";
@@ -27,10 +28,11 @@ function BlogPostListItem({ post }: { post: BlogPostSummary }) {
             params={{ slug: post.slug }}
             className="blog-publication-cover shrink-0 overflow-hidden rounded-sm border border-border bg-muted/30 lg:w-44"
           >
-            <img
+            <BlogCoverImage
               src={post.coverImage}
               alt={`Capa de ${post.title}`}
-              className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              className="aspect-[4/3] w-full transition-transform duration-300 group-hover:scale-[1.02]"
+              imageClassName="size-full object-cover"
             />
           </Link>
         ) : null}

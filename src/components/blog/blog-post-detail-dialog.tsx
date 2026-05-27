@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Calendar, Loader2, Tag, User } from "lucide-react";
 
+import { BlogCoverImage } from "@/components/blog/blog-cover-image";
 import {
   Dialog,
   DialogContent,
@@ -86,10 +87,11 @@ export function BlogPostDetailDialog({ open, onOpenChange, postId }: BlogPostDet
             <div className="space-y-5">
               {post.coverImage ? (
                 <div className="overflow-hidden rounded-md border border-border bg-muted/30">
-                  <img
+                  <BlogCoverImage
                     src={post.coverImage}
                     alt={`Capa de ${post.title}`}
-                    className="aspect-video w-full object-cover"
+                    className="aspect-video w-full"
+                    imageClassName="size-full object-cover"
                   />
                 </div>
               ) : null}

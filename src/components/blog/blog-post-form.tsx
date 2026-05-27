@@ -45,6 +45,7 @@ import {
   blogPostFormSchema,
   type BlogPostFormValues,
 } from "./blog-post-schema";
+import { BlogCoverImagePreview } from "./blog-cover-image-preview";
 
 type BlogPostFormDialogProps = {
   open: boolean;
@@ -125,6 +126,7 @@ export function BlogPostFormDialog({
   });
 
   const isPending = isCreating || isUpdating;
+  const coverImageValue = form.watch("coverImage");
 
   function onSubmit(values: BlogPostFormValues) {
     if (isEdit && post) {
@@ -223,7 +225,17 @@ export function BlogPostFormDialog({
                       {...field}
                     />
                   </FormControl>
+                  <p className="text-xs text-muted-foreground">
+                    Cole o endereço direto do arquivo de imagem, não a página do site onde ela
+                    aparece.
+                  </p>
                   <FormMessage />
+                  {coverImageValue.trim() ? (
+                    <BlogCoverImagePreview
+                      src={coverImageValue}
+                      alt="Pré-visualização da capa"
+                    />
+                  ) : null}
                 </FormItem>
               )}
             />

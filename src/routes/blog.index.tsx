@@ -8,6 +8,6 @@ export const Route = createFileRoute("/blog/")({
   validateSearch: validatePublicBlogSearch,
   component: BlogPage,
   head: () => ({
-    meta: [{ title: `Publicações — ${SITE.shortName}` }],
+    meta: [{ title: `Blog — ${SITE.shortName}` }],
   }),
 });

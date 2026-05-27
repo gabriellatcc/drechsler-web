@@ -39,7 +39,7 @@ export const PAGE_CONTENT: Record<
       "Soluções tecnológicas, analíticas, regulatórias e de treinamento para atender clientes nos setores químico, farmacêutico e regulatório.",
   },
   blog: {
-    label: "Publicações",
+    label: "Blog",
     title: "Publicações científicas",
     description:
       "Artigos, notas técnicas e conteúdos elaborados pela equipe DRECHSLER sobre química, regulatório e inovação.",

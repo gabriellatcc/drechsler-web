@@ -257,7 +257,7 @@ export const BASE_NAV_ITEMS = [
 ] as const satisfies readonly SiteNavItem[];
 
 export const BLOG_NAV_ITEM = {
-  label: "Publicações",
+  label: "Blog",
   to: "/blog" as const,
 } satisfies SiteNavItem;
 
