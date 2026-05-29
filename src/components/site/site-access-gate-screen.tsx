@@ -19,12 +19,12 @@ export function SiteAccessGateScreen() {
     setError(null);
 
     if (!password) {
-      setError("Informe a senha enviada por e-mail.");
+      setError("Informe a senha enviada pelo desenvolvedor.");
       return;
     }
 
     if (!verifySiteGatePassword(password)) {
-      setError("Senha incorreta. Verifique o e-mail e tente novamente.");
+      setError("Senha incorreta.");
       return;
     }
 
