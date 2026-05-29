@@ -482,7 +482,7 @@
                     "author": {
                       "id": "cmpmzwgun0000v820oqv930by",
                       "name": "Administrador",
-                      "email": "lj@drechsler.net.br"
+                      "email": "lauridrechsler.net.br"
                     }
                   },
                   "message": "Operação realizada com sucesso"
@@ -694,7 +694,7 @@
                     "author": {
                       "id": "cmpmzwgun0000v820oqv930by",
                       "name": "Administrador",
-                      "email": "lj@drechsler.net.br"
+                      "email": "lauridrechsler.net.br"
                     }
                   },
                   "message": "Operação realizada com sucesso"
@@ -771,7 +771,7 @@
                     "author": {
                       "id": "cmpmzwgun0000v820oqv930by",
                       "name": "Administrador",
-                      "email": "lj@drechsler.net.br"
+                      "email": "lauridrechsler.net.br"
                     }
                   },
                   "message": "Operação realizada com sucesso"
@@ -897,7 +897,7 @@
                     "author": {
                       "id": "cmpmzwgun0000v820oqv930by",
                       "name": "Administrador",
-                      "email": "lj@drechsler.net.br"
+                      "email": "lauridrechsler.net.br"
                     }
                   },
                   "message": "Operação realizada com sucesso"
@@ -1070,7 +1070,7 @@
                     "author": {
                       "id": "cmpmzwgun0000v820oqv930by",
                       "name": "Administrador",
-                      "email": "lj@drechsler.net.br"
+                      "email": "lauridrechsler.net.br"
                     }
                   },
                   "message": "Operação realizada com sucesso"
@@ -1116,7 +1116,7 @@
                 "properties": {}
               },
               "example": {
-                "email": "lj@drechsler.net.br",
+                "email": "lauridrechsler.net.br",
                 "password": "senha123$"
               }
             }
@@ -1166,7 +1166,7 @@
                     "user": {
                       "id": "cmpmzwgun0000v820oqv930by",
                       "name": "Administrador",
-                      "email": "lj@drechsler.net.br"
+                      "email": "lauridrechsler.net.br"
                     }
                   },
                   "message": "Operação realizada com sucesso"
@@ -1218,7 +1218,7 @@
                   "data": {
                     "id": "cmpmzwgun0000v820oqv930by",
                     "name": "Administrador",
-                    "email": "lj@drechsler.net.br"
+                    "email": "lauridrechsler.net.br"
                   },
                   "message": "Operação realizada com sucesso"
                 }

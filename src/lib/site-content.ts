@@ -6,7 +6,7 @@ export const SITE = {
 } as const;
 
 export const CONTACT = {
-  emails: ["contato@drechsler.net.br"],
+  emails: ["contato@drechsler.net.br", "lauri@drechsler.net.br"],
   whatsapp: "12991076376",
   linkedin: "https://www.linkedin.com/company/drechsler-inova%C3%A7%C3%A3o-tecnologia-qu%C3%ADmica/",
 } as const;
