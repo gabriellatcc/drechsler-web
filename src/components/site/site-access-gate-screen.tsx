@@ -30,6 +30,7 @@ export function SiteAccessGateScreen() {
 
     unlock();
   }
+    /** TEMPORARY — gate de acesso ao site público até liberação do cliente. */
 
   return (
     <div className="flex min-h-svh flex-col items-center justify-center bg-background px-4 py-10">
