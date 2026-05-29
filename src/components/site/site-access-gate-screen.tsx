@@ -40,8 +40,7 @@ export function SiteAccessGateScreen() {
           </div>
           <CardTitle>Acesso restrito</CardTitle>
           <CardDescription>
-            Acesso restrito ao administrador, digite a senha encaminhada por e-mail para
-            liberar.
+            Acesso restrito ao administrador do sistema, consulte o desenvolvedor para obter a senha e liberar o acesso.
           </CardDescription>
         </CardHeader>
         <CardContent>
