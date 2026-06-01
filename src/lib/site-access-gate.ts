@@ -10,7 +10,7 @@
  */
 
 /** Único switch: `false` desliga o gate sem apagar o código. */
-export const SITE_ACCESS_GATE_ENABLED = true;
+export const SITE_ACCESS_GATE_ENABLED = false;
 
 export const SITE_ACCESS_STORAGE_KEY = "drechsler_site_access_unlocked";
 
